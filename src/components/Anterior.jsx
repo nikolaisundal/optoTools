@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import Efron from './Efron';
 import Checkboxes from './Checkboxes';
+import Select from './Select';
 
 
 export default function Anterior({tests, handleTestChange}) {
@@ -11,18 +12,12 @@ export default function Anterior({tests, handleTestChange}) {
     setShowSelect(!showSelect)
   }
 
-  console.log(showSelect)
   return (
     <div>
     <div className="flex content-center justify-center w-full mb-5">
       <form>
         <div className='w-52'>
-          <div className='relative cursor-pointer' onClick={()=> handleSelectShow()}>
-            <select className='w-52 p-2'>
-              <option className='flex justify-center items-center p-2'>Velg tester</option>
-            </select>
-            <div className="absolute left-0 right-0 top-0 bottom-0"></div>
-          </div>
+          <Select handleSelectShow={handleSelectShow}/>
           {showSelect ?
             <div className='bg-white'>
             {tests.map(test => (
