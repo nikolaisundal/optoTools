@@ -1,6 +1,9 @@
 import { useState } from 'react'
 import { v4 as uuidv4 } from 'uuid';
-import Anterior from './components/Anterior'
+import Gpt from './components/Gpt';
+import Anterior from './components/Anterior';
+import Calculator from './components/Calculator';
+
 
 function App() {
   const [tests, setTests] = useState(sampleTests);
@@ -20,6 +23,8 @@ function App() {
           handleTestChange={handleTestChange}
           tests={[...tests]}  
         />
+        <Gpt/>
+        {/* <Calculator/> */}
     </div>
   )
 }
