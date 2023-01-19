@@ -1,73 +1,90 @@
-import React, {useState} from 'react';
-
-export default function SpectacleForm()  {
-  const [frame, setFrame] = useState(0);
-  const [lens, setLens] = useState(0);
-  const [lensCoating, setLensCoating] = useState(0);
-  const [total, setTotal] = useState(0);
-
-  const handleFrameChange = (event) => {
-    setFrame(event.target.value);
-  };
-
-  const handleLensChange = (event) => {
-    setLens(event.target.value);
-  };
-
-  const handleLensCoatingChange = (event) => {
-    setLensCoating(event.target.value);
-  };
-
-  const calculateTotal = (event) => {
-    event.preventDefault();
-    setTotal(Number(frame) + Number(lens) + Number(lensCoating));
-  };
+import Multiselect from 'multiselect-react-dropdown';
 
 
+
+export default function Calculator(props) {
+  const {
+    handleLensPriceChange, 
+    handleOnRemove, 
+    handleLensPrice, 
+    options, 
+    specPrice,
+    handleFrameNameChange,
+    handleFramePriceChange,
+    inputRefArray,
+    index
+  } = props
   return (
     <>
-    <form>
-      <div className="flex flex-col md:flex-row md:items-center md:justify-between">
-        <label htmlFor="frame" className="block text-gray-700 font-bold md:text-right mb-1 md:mb-0 pr-4">
-          Spectacle Frame:
-        </label>
-        <input
-          type="text"
-          id="frame"
-          value={frame}
-          onChange={handleFrameChange}
-          className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-        />
-      </div>
-      <div className="flex flex-col md:flex-row md:items-center md:justify-between mt-4">
-        <label htmlFor="lens" className="block text-gray-700 font-bold md:text-right mb-1 md:mb-0 pr-4">
-          Lens:
-        </label>
-        <input
-          type="text"
-          id="lens"
-          value={lens}
-          onChange={handleLensChange}
-          className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-        />
-      </div>
-      <div className="flex flex-col md:flex-row md:items-center md:justify-between mt-4">
-        <label htmlFor="lensCoating" className="block text-gray-700 font-bold md:text-right mb-1 md:mb-0 pr-4">
-          Lens Coating:
-        </label>
-        <input
-          type="text"
-          id="lensCoating"
-          value={lensCoating}
-          onChange={handleLensCoatingChange}
-          className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-          />
+    <div className='w-full justify-center flex mb-3'>
+      <form>
+        <div className='grid grid-cols-5 gap-3 w-70'>
+            <div className='flex items-center col-span-1'>
+                <label 
+                    className='text-gray-800 font-bold mb-1 whitespace-nowrap mr-2' 
+                    htmlFor="glass">Innfatning:
+                </label>
+            </div> 
+          <div className='flex items-center col-span-3'>    
+            <input 
+                className='appearance-none border-2 border-gray-200 rounded-lg w-full py-2 px-4 text-gray-700 leading-tight' 
+                type="text" 
+                name="innfatning"
+                id="innfatning"
+                value={specPrice.frameName}
+                onChange={(e) => handleFrameNameChange(e, specPrice.id)}
+                />
+          </div>
+          <div className='flex items-center col-span-1'>    
+            <input 
+                className='appearance-none border-2 border-gray-200 rounded-lg w-full py-2 px-4 text-gray-700 leading-tight' 
+                type="text" 
+                name="price"
+                id="price"
+                value={specPrice.framePrice} 
+                onChange={(e) => handleFramePriceChange(e, specPrice.id)}
+                />
+          </div>
+          <div className='flex items-center col-span-1'>
+              <label 
+                  className='text-gray-800 font-bold mb-1 whitespace-nowrap mr-2' 
+                  htmlFor="glass">Glass:
+              </label>
+          </div>
+          <div className='flex items-center col-span-3'> 
+            <Multiselect
+              className='bg-slate-50 appearance-none border-2 border-gray-200 rounded-lg w-full text-gray-700 leading-tight' 
+              options={options}
+              showArrow={true}
+              selectionLimit={1}
+              displayValue="type"
+              groupBy="cat"
+              onSelect={(e) => handleLensPrice(e, specPrice.id, index)}
+              onRemove={(e) => handleOnRemove(e, specPrice.id)}
+              style={{
+                searchBox: {
+                  border: 'none',
+                }
+            }}
+            />
+          </div>
+          <div className='flex items-center col-span-1'>    
+            <input
+                className='appearance-none border-2 border-gray-200 rounded-lg w-full py-2 px-4 text-gray-700 leading-tight' 
+                type="text" 
+                name="price"
+                id="price"
+                ref={inputRefArray}
+                value={specPrice.lensPrice}
+                onChange={(e) => handleLensPriceChange(e, specPrice.id)}
+                />
+          </div>
         </div>
-        <div>
-          <button onClick={(event) =>calculateTotal(event)}>Calculate</button>
-        </div>
-        <div>
-          {total}
-        </div>
-    </form>
-    </>)}
+      </form>
+    </div>
+    </>
+  )
+}
+
+
+
