@@ -4,6 +4,7 @@ import Anterior from './components/Anterior';
 import Calculator from './components/Calculator';
 import RadioRow from './components/RadioRow'
 import Eye from './components/Eye';
+import Summary from './components/Summary';
 import  lens  from './assets/lensPrices.jsx'
 
 const LOCAL_STORAGE_KEY = "optoTools.tests"
@@ -144,10 +145,10 @@ function App() {
 
   const handleOfferChange = (value) => {
     let specPriceCopy = {...specPrice}
-    if (offerSelect !== "ToForEn"){
+    /* if (offerSelect !== "ToForEn"){
       specPriceCopy.specNum2 = initialState.specNum2
       setSpecPrice(specPriceCopy)
-    }
+    } */
     setOfferSelect(value)
   } 
 
@@ -325,10 +326,30 @@ function App() {
             inputRefArray={inputRefArray[1]}
           />
         </>}
-        <div className='text-center mt-5'>
+        <h5 className='text-center mt-10'>Brille 1:</h5>
+        <div className="flex justify-center mb-5">
+          <Summary 
+            specPrice={specPrice.specNum1}
+            offerSelect={offerSelect}
+            cheapestId={specPrice.cheapestId}
+            />
+        </div>
+        {(offerSelect === "ToForEn") ?
+        <>
+        <h6 className='text-center'>Brille 2:</h6>
+        <div className="flex justify-center mb-10">
+          <Summary 
+            specPrice={specPrice.specNum2}
+            offerSelect={offerSelect}
+            cheapestId={specPrice.cheapestId}
+          />
+        </div>
+        </>
+        : null  
+      }
+        <div className='text-center mt-5 mb-40'>
           Total: {specPrice.total > 0 ? specPrice.total: 0}kr{/* <button ref={inputRefArray}>Skriv ut</button> */}
         </div>
-        {console.log(specPrice.cheapestId)}
     </div>
   )
 }
