@@ -6,9 +6,15 @@ export default function RadioRow({handleOfferChange}) {
         <input 
             className='ml-4 mr-1 cursor-pointer' 
             type="radio" 
-            value="ToForEn" 
+            value="ToForEnUV" 
             name="Tilbud"   
             defaultChecked/> 
+            To for en inkl. UV
+        <input 
+            className='ml-4 mr-1 cursor-pointer' 
+            type="radio" 
+            value="ToForEn" 
+            name="Tilbud"/> 
             To for en
         <input 
             className='ml-4 mr-1 cursor-pointer' 
@@ -34,6 +40,12 @@ export default function RadioRow({handleOfferChange}) {
             value="NAV" 
             name="Tilbud" /> 
             NAV
+        <input 
+            className='ml-4 mr-1 cursor-pointer' 
+            type="checkbox" 
+            value="Synstest" 
+            name="Synstest" /> 
+            Synstest
     </div>
   )
 }

@@ -1,11 +1,18 @@
 import { useState, useEffect, useRef } from 'react'
 import { v4 as uuidv4 } from 'uuid';
+import { useReactToPrint } from 'react-to-print';
+
 import Anterior from './components/Anterior';
 import Calculator from './components/Calculator';
 import RadioRow from './components/RadioRow'
 import Eye from './components/Eye';
 import Summary from './components/Summary';
+import Personalia from './components/Personalia';
+
+
+
 import  lens  from './assets/lensPrices.jsx'
+
 
 const LOCAL_STORAGE_KEY = "optoTools.tests"
 
@@ -40,13 +47,19 @@ function App() {
 
   
 
-  const [offerSelect, setOfferSelect] = useState("ToForEn")
+  const [offerSelect, setOfferSelect] = useState("ToForEnUV")
   const [modalVisible, setModalVisible] = useState(false)
   const [options] = useState(lens)
+  const [synstest, setSynstest] = useState(false)
   const [specPrice, setSpecPrice] = useState(initialState)
+  const [personalia, setPersonalia] = useState({
+    name: "Stefan Stiffenz",
+    birthDate: "08.10.1990"
+  })
   
   const inputRefArray = [useRef(), useRef()]
-    
+  const componentRef = useRef();
+  
   useEffect(() => { 
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(tests))
   }, [tests])
@@ -57,16 +70,10 @@ function App() {
     handleCalculateTotal()
   }, [offerSelect]) 
 
-
- /*  function updateLensPrice(id, newPrice, state) {
-  //Husk å ikke mutere state. dra den ut..
-    for (let prop in state) {
-        if (state[prop].id === id) {
-            state[prop].lensPrice = newPrice;
-            return state;
-        }
-    }
-} */
+  const handlePrint = useReactToPrint({
+    content: () => componentRef.current,
+    documentTitle: `Prisoverslag ${personalia.name}`
+  });
 
   const calculateTwoForOne = () => {
     let specPriceCopy = {...specPrice}
@@ -80,7 +87,7 @@ function App() {
       specPriceCopy.specNum2.framePrice + 
       specPriceCopy.specNum2.lensPrice
     )
-    if (lensTypeOne.includes("farge") && lensTypeTwo.includes("farge")) {
+    if (lensTypeOne.includes("m/farge") && lensTypeTwo.includes("m/farge")) {
       if (specNum1Total > specNum2Total) {
         specPriceCopy.cheapestId = specPriceCopy.specNum2.id
         specPriceCopy.total = specNum1Total
@@ -88,9 +95,9 @@ function App() {
         specPriceCopy.cheapestId = specPriceCopy.specNum1.id
         specPriceCopy.total = specNum2Total
       }
-    } else if (lensTypeOne.includes("farge")) {
+    } else if (offerSelect === "ToForEnUV" && lensTypeOne.includes("m/farge")) {
         specNum1Total = (specNum1Total - 400)
-    } else if (lensTypeTwo.includes("farge")) {
+    } else if (offerSelect === "ToForEnUV" && lensTypeTwo.includes("m/farge")) {
         specNum2Total = (specNum2Total - 400)    
     } if (specNum1Total > specNum2Total) {
       specPriceCopy.cheapestId = Number(specPriceCopy.specNum2.id)
@@ -99,7 +106,11 @@ function App() {
       specPriceCopy.cheapestId = Number(specPriceCopy.specNum1.id)
       specPriceCopy.total = specNum2Total
     }
+    if (synstest) {
+      specPriceCopy.total = (specPriceCopy.total + 685)
+    }
     setSpecPrice(specPriceCopy)
+    console.log("hei")
   }
   
   const calculateOtherOffers = () => {
@@ -109,25 +120,28 @@ function App() {
       specPriceCopy.specNum1.lensPrice
     )
     if (offerSelect === "Komplett") {
+      if (specNum1Total >= 800) {
       specNum1Total = (specNum1Total - 800)
       specPriceCopy.total = specNum1Total
-      setSpecPrice(specPriceCopy)
+      }
     } else if (offerSelect === "60+") {
       specNum1Total = (specNum1Total * 0.75)
       specPriceCopy.total = specNum1Total
-      setSpecPrice(specPriceCopy)
     } else if (offerSelect === "GoldenTicket") {
       specNum1Total = (specNum1Total * 0.50)
       specPriceCopy.total = specNum1Total
-      setSpecPrice(specPriceCopy)
     } else if (offerSelect === "NAV") {
       specPriceCopy.total = specNum1Total
-      setSpecPrice(specPriceCopy)
     }
+    if (synstest) {
+      specPriceCopy.total = (specPriceCopy.total + 685)
+    }
+    console.log("hei")
+    setSpecPrice(specPriceCopy)
   }
 
   const handleCalculateTotal = () => {
-    if (offerSelect === "ToForEn") {
+    if (offerSelect === "ToForEn" || offerSelect === "ToForEnUV") {
       calculateTwoForOne()
     } else {
       calculateOtherOffers()
@@ -136,20 +150,19 @@ function App() {
 
   const handleTestChange = (id) => {
     const testArray = [...tests];
-    const selctedTest = testArray.find(test => 
+    const selectedTest = testArray.find(test => 
       test.id === id
     )
-    selctedTest.show = !selctedTest.show
+    selectedTest.show = !selectedTest.show
     setTests(testArray) 
   }
 
   const handleOfferChange = (value) => {
-    let specPriceCopy = {...specPrice}
-    /* if (offerSelect !== "ToForEn"){
-      specPriceCopy.specNum2 = initialState.specNum2
-      setSpecPrice(specPriceCopy)
-    } */
-    setOfferSelect(value)
+    if (value === "Synstest") {
+      setSynstest(!synstest)
+    } else {
+      setOfferSelect(value)
+    }
   } 
 
   const handleUserInputChange = (e, eyeId) => {
@@ -247,10 +260,14 @@ function App() {
 
   const handleLensPriceChange = (e, id) => {
     let specPriceCopy = {...specPrice}
+    let num = Number(e.target.value)
+    if (isNaN(num)) {
+      return
+    }
     if ( id === 1) {
-      specPriceCopy.specNum1.lensPrice = Number(e.target.value)
+      specPriceCopy.specNum1.lensPrice = num
     } else {
-      specPriceCopy.specNum2.lensPrice = Number(e.target.value)
+      specPriceCopy.specNum2.lensPrice = num
     }
     setSpecPrice(specPriceCopy)
     handleCalculateTotal()
@@ -268,10 +285,14 @@ function App() {
   
   const handleFramePriceChange = (e, id) => {
     let specPriceCopy = {...specPrice}
+    let num = Number(e.target.value)
+    if (isNaN(num)) {
+      return
+    }
     if ( id === 1) {
-      specPriceCopy.specNum1.framePrice = Number(e.target.value)
+      specPriceCopy.specNum1.framePrice = num
     } else {
-      specPriceCopy.specNum2.framePrice = Number(e.target.value)
+      specPriceCopy.specNum2.framePrice = num
     }
     setSpecPrice(specPriceCopy)
     handleCalculateTotal()
@@ -283,7 +304,7 @@ function App() {
       <Eye className="cursor-pointer pl-2" />
       <div className='text-lg px-1'>optoTools</div>
     </div>
-      <h1 className='text-center text-3xl my-5'>
+      {/* <h1 className='text-center text-3xl my-5'>
         Anterior
       </h1>
         <Anterior 
@@ -294,7 +315,7 @@ function App() {
           showModal={showModal}
           modalVisible={modalVisible} 
           tests={[...tests]}  
-        />
+        /> */}
       <h4 className='text-center text-3xl my-5'>
         Brillekalkulator
       </h4>
@@ -312,7 +333,7 @@ function App() {
             specPrice={specPrice.specNum1}
             inputRefArray={inputRefArray[0]}
             />
-      {offerSelect === "ToForEn"&&
+      {(offerSelect === "ToForEn" || offerSelect === "ToForEnUV")&&
         <>    
           <Calculator
             index={1}  
@@ -326,34 +347,37 @@ function App() {
             inputRefArray={inputRefArray[1]}
           />
         </>}
-        <h5 className='text-center mt-10'>Brille 1:</h5>
-        <div className="flex justify-center mb-5">
-          <Summary 
-            specPrice={specPrice.specNum1}
-            offerSelect={offerSelect}
-            cheapestId={specPrice.cheapestId}
+        <div ref={componentRef}>
+          <Personalia/>
+          <h5 className='text-center mt-10 font-bold'>Brille 1:</h5>
+          <div className="flex justify-center mb-5">
+            <Summary 
+              specPrice={specPrice.specNum1}
+              offerSelect={offerSelect}
+              cheapestId={specPrice.cheapestId}
+              />
+          </div>
+          {(offerSelect === "ToForEn" || offerSelect === "ToForEnUV") ?
+          <>
+          <h6 className='text-center font-bold'>Brille 2:</h6>
+          <div className="flex justify-center mb-10">
+            <Summary 
+              specPrice={specPrice.specNum2}
+              offerSelect={offerSelect}
+              cheapestId={specPrice.cheapestId}
             />
+          </div>
+          </>
+          : null  
+        }
+          <div className='text-center mt-5 mb-40 font-bold'>
+            Total: {specPrice.total > 0 ? specPrice.total: 0}kr
+          </div>
         </div>
-        {(offerSelect === "ToForEn") ?
-        <>
-        <h6 className='text-center'>Brille 2:</h6>
-        <div className="flex justify-center mb-10">
-          <Summary 
-            specPrice={specPrice.specNum2}
-            offerSelect={offerSelect}
-            cheapestId={specPrice.cheapestId}
-          />
-        </div>
-        </>
-        : null  
-      }
-        <div className='text-center mt-5 mb-40'>
-          Total: {specPrice.total > 0 ? specPrice.total: 0}kr{/* <button ref={inputRefArray}>Skriv ut</button> */}
-        </div>
+        <button className='text-center' onClick={handlePrint}>Print this out!</button>
     </div>
   )
 }
-
 
 
 export default App
@@ -439,7 +463,7 @@ const sampleTests = [
   },
   {
     id: uuidv4(),
-    name: "Neovascularisering",
+    name: "Neovaskularisering",
     show: true,
     od: {
       id: uuidv4(),

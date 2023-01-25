@@ -61,12 +61,21 @@ export default function Calculator(props) {
               groupBy="cat"
               onSelect={(e) => handleLensPrice(e, specPrice.id, index)}
               onRemove={(e) => handleOnRemove(e, specPrice.id)}
+              selectedValues={specPrice.id === 2 &&specPrice.lensType !== "" ?
+                [
+                  {
+                    type: `${specPrice.lensType}`
+                  }
+                ]:null}
               style={{
                 searchBox: {
                   border: 'none',
-                }
+                },
+                chips: { 
+	                background: "rgb(22 101 52)"}
             }}
             />
+            {console.log(specPrice.lensType)}
           </div>
           <div className='flex items-center col-span-1'>    
             <input
