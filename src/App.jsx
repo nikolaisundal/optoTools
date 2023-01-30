@@ -8,7 +8,7 @@ import RadioRow from './components/RadioRow'
 import Eye from './components/Eye';
 import Summary from './components/Summary';
 import Personalia from './components/Personalia';
-
+import PersonaliaInput from './components/PersonaliaInput';
 
 
 import  lens  from './assets/lensPrices.jsx'
@@ -53,8 +53,8 @@ function App() {
   const [synstest, setSynstest] = useState(false)
   const [specPrice, setSpecPrice] = useState(initialState)
   const [personalia, setPersonalia] = useState({
-    name: "Stefan Stiffenz",
-    birthDate: "08.10.1990"
+    name: "",
+    birthDate: ""
   })
   
   const inputRefArray = [useRef(), useRef()]
@@ -68,12 +68,21 @@ function App() {
 
   useEffect(() => {
     handleCalculateTotal()
-  }, [offerSelect]) 
+  }, [offerSelect, synstest]) 
 
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
     documentTitle: `Prisoverslag ${personalia.name}`
   });
+
+  const handlePersonaliaChange = (e) => {
+    let personaliaCopy = {...personalia}
+    let propToChange = e.target.id;
+    personaliaCopy = { ...personaliaCopy, [propToChange]: e.target.value };
+    /* let propToChange = Object.keys(personaliaCopy).filter(key => key === e.target.id)
+    personaliaCopy[propToChange] = e.target.value */
+    setPersonalia(personaliaCopy)
+  }
 
   const calculateTwoForOne = () => {
     let specPriceCopy = {...specPrice}
@@ -110,9 +119,8 @@ function App() {
       specPriceCopy.total = (specPriceCopy.total + 685)
     }
     setSpecPrice(specPriceCopy)
-    console.log("hei")
   }
-  
+
   const calculateOtherOffers = () => {
     let specPriceCopy = {...specPrice}
     let specNum1Total = (
@@ -120,10 +128,10 @@ function App() {
       specPriceCopy.specNum1.lensPrice
     )
     if (offerSelect === "Komplett") {
-      if (specNum1Total >= 800) {
-      specNum1Total = (specNum1Total - 800)
-      specPriceCopy.total = specNum1Total
+      if (specPriceCopy.specNum1.lensPrice >= 800) {
+        specNum1Total = (specNum1Total - 800)
       }
+      specPriceCopy.total = specNum1Total
     } else if (offerSelect === "60+") {
       specNum1Total = (specNum1Total * 0.75)
       specPriceCopy.total = specNum1Total
@@ -133,10 +141,9 @@ function App() {
     } else if (offerSelect === "NAV") {
       specPriceCopy.total = specNum1Total
     }
-    if (synstest) {
+    if (synstest===true) {
       specPriceCopy.total = (specPriceCopy.total + 685)
-    }
-    console.log("hei")
+  }
     setSpecPrice(specPriceCopy)
   }
 
@@ -304,7 +311,7 @@ function App() {
       <Eye className="cursor-pointer pl-2" />
       <div className='text-lg px-1'>optoTools</div>
     </div>
-      {/* <h1 className='text-center text-3xl my-5'>
+      <h1 className='text-center text-3xl my-5'>
         Anterior
       </h1>
         <Anterior 
@@ -315,12 +322,17 @@ function App() {
           showModal={showModal}
           modalVisible={modalVisible} 
           tests={[...tests]}  
-        /> */}
+        />
       <h4 className='text-center text-3xl my-5'>
         Brillekalkulator
       </h4>
         <RadioRow
           handleOfferChange={handleOfferChange}
+        />
+        <PersonaliaInput
+          name={personalia.name}
+          birthDate={personalia.birthDate}
+          handlePersonaliaChange={handlePersonaliaChange}
         />
           <Calculator
             index={0} 
@@ -348,13 +360,17 @@ function App() {
           />
         </>}
         <div ref={componentRef}>
-          <Personalia/>
+          <Personalia
+            name={personalia.name}
+            birthDate={personalia.birthDate}
+            />
           <h5 className='text-center mt-10 font-bold'>Brille 1:</h5>
           <div className="flex justify-center mb-5">
             <Summary 
               specPrice={specPrice.specNum1}
               offerSelect={offerSelect}
               cheapestId={specPrice.cheapestId}
+              synstest={synstest}
               />
           </div>
           {(offerSelect === "ToForEn" || offerSelect === "ToForEnUV") ?
@@ -370,11 +386,17 @@ function App() {
           </>
           : null  
         }
-          <div className='text-center mt-5 mb-40 font-bold'>
+          <div className='text-center mt-5 mb-6 font-bold'>
             Total: {specPrice.total > 0 ? specPrice.total: 0}kr
           </div>
         </div>
-        <button className='text-center' onClick={handlePrint}>Print this out!</button>
+        <div className='flex justify-center mb-40'>
+          <button className='bg-green-800 text-slate-50 p-2 rounded w-20'
+            onClick={handlePrint}>
+              Skriv ut
+          </button>
+        </div>
+        
     </div>
   )
 }

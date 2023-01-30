@@ -22,7 +22,7 @@ export default function Calculator(props) {
             <div className='flex items-center col-span-1'>
                 <label 
                     className='text-gray-800 font-bold mb-1 whitespace-nowrap mr-2' 
-                    htmlFor="glass">Innfatning:
+                    htmlFor="Innfatning">Innfatning:
                 </label>
             </div> 
           <div className='flex items-center col-span-3'>    
@@ -31,6 +31,7 @@ export default function Calculator(props) {
                 type="text" 
                 name="innfatning"
                 id="innfatning"
+                placeholder='Skriv inn merke/SKU'
                 value={specPrice.frameName}
                 onChange={(e) => handleFrameNameChange(e, specPrice.id)}
                 />
@@ -55,13 +56,13 @@ export default function Calculator(props) {
             <Multiselect
               className='bg-slate-50 appearance-none border-2 border-gray-200 rounded-lg w-full text-gray-700 leading-tight' 
               options={options}
-              showArrow={true}
-              selectionLimit={1}
+              selectionLimit="1"
               displayValue="type"
               groupBy="cat"
+              placeholder='   Velg glass'
               onSelect={(e) => handleLensPrice(e, specPrice.id, index)}
               onRemove={(e) => handleOnRemove(e, specPrice.id)}
-              selectedValues={specPrice.id === 2 &&specPrice.lensType !== "" ?
+              selectedValues={specPrice.id === 2 && specPrice.lensType !== "" ?
                 [
                   {
                     type: `${specPrice.lensType}`
@@ -75,7 +76,6 @@ export default function Calculator(props) {
 	                background: "rgb(22 101 52)"}
             }}
             />
-            {console.log(specPrice.lensType)}
           </div>
           <div className='flex items-center col-span-1'>    
             <input

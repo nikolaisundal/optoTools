@@ -9,7 +9,8 @@ export default function Summary(props) {
         lensPrice, 
         id},
         offerSelect,   
-        cheapestId
+        cheapestId,
+        synstest
       } = props;
     return (
         
@@ -22,33 +23,46 @@ export default function Summary(props) {
             </tr>
           </thead>
           <tbody>
+          {synstest
+              ?
+            <tr className="text-left">
+              <td className="border-2 border-green-800 px-4 py-2">
+                Synstest
+              </td>
+              <td className="border-2 border-green-800 px-4 py-2">
+                685 kr
+              </td>
+              <td className="border-2 border-green-800 px-4 py-2">
+              </td>
+            </tr>
+              : null}  
             <tr className="text-left">
               <td className="border-2 border-green-800 px-4 py-2">
                 {(frameName === "" && framePrice <=1395)
-                  ? "Specsavers"
+                  ? "Innfatning: specsavers"
                   :(frameName === "" && framePrice >1395)
-                  ? "Designer"
-                  : frameName}
+                  ? "Innfatning: designer"
+                  : `Innfatning: ${frameName}`}
               </td>
               <td className="border-2 border-green-800 px-4 py-2">
                 {(offerSelect === "NAV" && framePrice > 295) 
-                  ? framePrice-295
+                  ? `${framePrice-295} kr` 
                   : (offerSelect !== "NAV")
-                  ? framePrice
-                  :0}
+                  ? `${framePrice} kr` 
+                  : "0 kr"}
               </td>
               <td className="border-2 border-green-800 px-4 py-2">
                 {(offerSelect === "ToForEnUV" && id === cheapestId)
-                  ? `-${framePrice}` 
+                  ? `-${framePrice} kr` 
                   : null} 
                 {(offerSelect === "ToForEn" && id === cheapestId) 
-                  ? `-${framePrice}` 
+                  ? `-${framePrice} kr` 
                   : null} 
                 {(offerSelect === "60+") 
-                  ? `-${framePrice*0.25}` 
+                  ? `-${framePrice*0.25} kr` 
                   : null} 
                 {(offerSelect === "GoldenTicket") 
-                  ? `-${framePrice*0.50}` 
+                  ? `-${framePrice*0.50} kr` 
                   : null} 
 
               </td>
@@ -60,7 +74,7 @@ export default function Summary(props) {
                 Brilletilpasning
               </td>
               <td className="border-2 border-green-800 px-4 py-2">
-                {framePrice >= 295 ? 295 :0 }  
+                {framePrice >= 295 ? `${295} kr` : `${0} kr` }  
               </td>
               <td className="border-2 border-green-800 px-4 py-2">
               </td>
@@ -68,30 +82,30 @@ export default function Summary(props) {
               : null}
             <tr className="text-left">
               <td className="border-2 border-green-800 px-4 py-2">
-                {lensType}
+                {`Glass: ${lensType}`}
               </td>
               <td className="border-2 border-green-800 px-4 py-2">
-                {lensPrice}
+                {`${lensPrice} kr`}
               </td>
               <td className="border-2 border-green-800 px-4 py-2">
                 {(offerSelect === "ToForEnUV" && id === cheapestId) 
-                  ? `-${lensPrice}` 
+                  ? `-${lensPrice} kr` 
                   : null} 
                 {(offerSelect === "ToForEnUV" && id !== cheapestId 
                   && lensType.includes("m/farge")) 
-                  ? `-400` 
+                  ? `-400 kr` 
                   : null} 
                 {(offerSelect === "ToForEn" && id === cheapestId) 
-                  ? `-${lensPrice}` 
+                  ? `-${lensPrice} kr` 
                   : null} 
                 {(offerSelect === "Komplett") 
-                  ? "-800" 
+                  ? "-800 kr" 
                   : null}
                 {(offerSelect === "60+") 
-                  ? `-${lensPrice*0.25}` 
+                  ? `-${lensPrice*0.25} kr` 
                   : null}
                 {(offerSelect === "GoldenTicket") 
-                  ? `-${lensPrice*0.50}` 
+                  ? `-${lensPrice*0.50} kr` 
                   : null}   
               </td>
             </tr>

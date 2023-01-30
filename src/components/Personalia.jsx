@@ -1,10 +1,10 @@
 
 
-export default function Personalia ({ name, birthdate }) {
+export default function Personalia ({ name, birthDate }) {
     return (
-        <div className="border border-gray-500 rounded-lg p-4 w-44">
-          <h1 className="text-black">Name:{name}ssssssssssssssssssssssss</h1>
-          <p className="text-black">Birthdate: {birthdate}</p>
+        <div className="flex flex-col overflow-hidden border w-1/4 border-gray-500 rounded-lg p-4 ml-8 mt-8">
+          <span className="text-black">Navn: {name}</span>
+          <span className="text-black mt-2">Fødselsdato: {birthDate}</span>
         </div>
       );
     };
