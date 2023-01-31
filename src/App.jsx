@@ -46,7 +46,7 @@ function App() {
   }
 
   
-  const [route, setRoute] = useState("calculator")
+  const [route, setRoute] = useState("template")
   const [offerSelect, setOfferSelect] = useState("ToForEnUV")
   const [modalVisible, setModalVisible] = useState(false)
   const [options] = useState(lens)
@@ -304,6 +304,11 @@ function App() {
     setSpecPrice(specPriceCopy)
     handleCalculateTotal()
   }
+
+  const handleRouteChange = (e) => {
+    setRoute(e.target.id)
+  }
+
   return (
     <>
     <div className="mt-20">
@@ -312,6 +317,18 @@ function App() {
       <Eye className="cursor-pointer pl-2" />
       <div className='text-lg px-1'>optoTools</div>
     </div>
+    </div>
+    <div className='text-center'>
+      <button className='bg-green-800 text-white mr-2'
+        id="calculator"
+        onClick={(e)=> handleRouteChange(e)}>
+        Brillekalkulator
+      </button>
+      <button className='bg-green-800 text-white ml-2'
+        id="template"
+        onClick={(e)=> handleRouteChange(e)}>
+        Mal
+      </button>
     </div>
     {route === "template" &&
       <>
