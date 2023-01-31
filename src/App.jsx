@@ -46,7 +46,7 @@ function App() {
   }
 
   
-
+  const [route, setRoute] = useState("calculator")
   const [offerSelect, setOfferSelect] = useState("ToForEnUV")
   const [modalVisible, setModalVisible] = useState(false)
   const [options] = useState(lens)
@@ -305,12 +305,16 @@ function App() {
     handleCalculateTotal()
   }
   return (
+    <>
     <div className="mt-20">
     <div className="flex absolute top-12 left-6 bg-purple-400 rounded-md shadow-2xl">
       <Eye className="cursor-pointer pr-2" />
       <Eye className="cursor-pointer pl-2" />
       <div className='text-lg px-1'>optoTools</div>
     </div>
+    </div>
+    {route === "template" &&
+      <>
       <h1 className='text-center text-3xl my-5'>
         Anterior
       </h1>
@@ -323,6 +327,9 @@ function App() {
           modalVisible={modalVisible} 
           tests={[...tests]}  
         />
+        </>}
+      {route === "calculator" &&
+      <>
       <h4 className='text-center text-3xl my-5'>
         Brillekalkulator
       </h4>
@@ -396,8 +403,10 @@ function App() {
               Skriv ut
           </button>
         </div>
-        
-    </div>
+        </>} 
+        </>
+    
+    
   )
 }
 
