@@ -311,20 +311,20 @@ function App() {
 
   return (
     <>
-    <div className="mt-20">
+    <div className="mt-4">
     <div className="flex absolute top-12 left-6 bg-purple-400 rounded-md shadow-2xl">
       <Eye className="cursor-pointer pr-2" />
       <Eye className="cursor-pointer pl-2" />
       <div className='text-lg px-1'>optoTools</div>
     </div>
     </div>
-    <div className='text-center'>
-      <button className='bg-green-800 text-white mr-2'
+    <div className='text-right mb-10'>
+      <button className='text-xl mr-4 hover:underline'
         id="calculator"
         onClick={(e)=> handleRouteChange(e)}>
         Brillekalkulator
       </button>
-      <button className='bg-green-800 text-white ml-2'
+      <button className='text-xl mx-4 hover:underline'
         id="template"
         onClick={(e)=> handleRouteChange(e)}>
         Mal
@@ -332,7 +332,7 @@ function App() {
     </div>
     {route === "template" &&
       <>
-      <h1 className='text-center text-3xl my-5'>
+      <h1 className='text-center text-3xl mb-5 mt-28'>
         Anterior
       </h1>
         <Anterior 
@@ -347,7 +347,7 @@ function App() {
         </>}
       {route === "calculator" &&
       <>
-      <h4 className='text-center text-3xl my-5'>
+      <h4 className='text-center text-3xl mb-5 mt-32'>
         Brillekalkulator
       </h4>
         <RadioRow

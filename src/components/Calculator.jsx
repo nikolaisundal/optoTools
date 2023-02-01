@@ -27,7 +27,7 @@ export default function Calculator(props) {
             </div> 
           <div className='flex items-center col-span-3'>    
             <input 
-                className='appearance-none border-2 border-gray-200 rounded-lg w-full py-2 px-4 text-gray-700 leading-tight' 
+                className='appearance-none border-2 border-gray-200 rounded-lg w-full py-2 px-1 text-gray-700 leading-tight' 
                 type="text" 
                 name="innfatning"
                 id="innfatning"
@@ -38,7 +38,7 @@ export default function Calculator(props) {
           </div>
           <div className='flex items-center col-span-1'>    
             <input 
-                className='appearance-none border-2 border-gray-200 rounded-lg w-full py-2 px-4 text-gray-700 leading-tight' 
+                className='appearance-none border-2 border-gray-200 rounded-lg w-full py-2 px-1 text-gray-700 leading-tight' 
                 type="text" 
                 name="price"
                 id="price"
@@ -54,7 +54,7 @@ export default function Calculator(props) {
           </div>
           <div className='flex items-center col-span-3'> 
             <Multiselect
-              className='bg-slate-50 appearance-none border-2 border-gray-200 rounded-lg w-full text-gray-700 leading-tight pl-3' 
+              className='bg-slate-50 appearance-none border-2 border-gray-200 rounded-lg text-gray-700 leading-tight' 
               options={options}
               selectionLimit="1"
               displayValue="type"
@@ -71,6 +71,7 @@ export default function Calculator(props) {
               style={{
                 searchBox: {
                   border: 'none',
+                  width: "43rem"
                 },
                 chips: { 
 	                background: "rgb(22 101 52)"}
