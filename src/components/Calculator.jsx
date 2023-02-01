@@ -80,7 +80,7 @@ export default function Calculator(props) {
           </div>
           <div className='flex items-center col-span-1'>    
             <input
-                className='appearance-none border-2 border-gray-200 rounded-lg w-full py-2 px-4 text-gray-700 leading-tight' 
+                className='appearance-none border-2 border-gray-200 rounded-lg w-full py-2 px-1 text-gray-700 leading-tight' 
                 type="text" 
                 name="price"
                 id="price"
