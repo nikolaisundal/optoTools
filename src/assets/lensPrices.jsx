@@ -220,7 +220,7 @@ const lens = [
       cat: "SV Reactions"
     },
     {
-      type: "SV 1.67 SV Reactions Lifestyle",
+      type: "1.67 SV Reactions Lifestyle",
       id: uuidv4(),
       price: 2700,
       cat: "SV Reactions"
@@ -275,7 +275,7 @@ const lens = [
       cat: "SV Polariserte"
     },
     {
-      type: "SV 1.67 SV Polariserte Lifestyle",
+      type: "1.67 SV Polariserte Lifestyle",
       id: uuidv4(),
       price: 3900,
       cat: "SV Polariserte"
@@ -616,7 +616,7 @@ const lens = [
     {
       type: "1.67 Elite UCSC Reactions",
       id: uuidv4(),
-      price: 60,
+      price: 6600,
       cat: "Elite Reactions" 
     },
 
