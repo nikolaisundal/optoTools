@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { v4 as uuidv4 } from 'uuid';
 import { useReactToPrint } from 'react-to-print';
 
-import Anterior from './components/Anterior';
+import Template from './components/Template';
 import Calculator from './components/Calculator';
 import RadioRow from './components/RadioRow'
 import Eye from './components/Eye';
@@ -48,7 +48,6 @@ function App() {
   
   const [route, setRoute] = useState("template")
   const [offerSelect, setOfferSelect] = useState("ToForEnUV")
-  const [modalVisible, setModalVisible] = useState(false)
   const [options] = useState(lens)
   const [synstest, setSynstest] = useState(false)
   const [specPrice, setSpecPrice] = useState(initialState)
@@ -156,12 +155,17 @@ function App() {
   }
 
   const handleTestChange = (id) => {
-    const testArray = [...tests];
-    const selectedTest = testArray.find(test => 
-      test.id === id
-    )
+    const testObject = {...tests};
+    let selectedTest; 
+    for (const key in testObject) {
+      testObject[key].filter(test => {
+        if (test.id === id) {
+          selectedTest = test
+        }
+      })
+    }
     selectedTest.show = !selectedTest.show
-    setTests(testArray) 
+    setTests(testObject) 
   }
 
   const handleOfferChange = (value) => {
@@ -172,16 +176,22 @@ function App() {
     }
   } 
 
-  const handleUserInputChange = (e, eyeId) => {
-    const testArray = [...tests]
-    testArray.forEach(item => {
-      if (item.od.id === eyeId) {
-        item.od.value = e.target.value;
-      } else if (item.os.id === eyeId) {
-        item.os.value = e.target.value;
-      }
-    })
-    setTests(testArray)
+  const handleUserInputChange = (e, eyeId, testID) => {
+    const testObject = {...tests}
+    let selectedTest;
+    for (const key in testObject) {
+      testObject[key].filter(test => {
+        if (test.id === testID) {
+          selectedTest = test
+        }  
+      })
+    }
+    for (const key in selectedTest) {
+      if(selectedTest[key].id === eyeId) {
+        selectedTest[key].value = e.target.value
+      }  
+    } 
+    setTests(testObject)
   }
 
   const copyContent = async (text) => {
@@ -192,48 +202,63 @@ function App() {
     }
   }
 
-  const handleCopyTest = (e, id) => {
+
+  const handleCopyTest = (e, btn, id) => {
     e.preventDefault();
-    let testArray = [...tests];
+    let componentToCopy;
     let inputText = "";
-    if (id === "buttonOd") {
-      testArray.map(test => {
+    const testObject = {...tests}
+
+    for (const key in testObject) {
+      testObject[key].filter(test => {
+        if (test.id === id) {
+          componentToCopy = testObject[key]
+        }  
+      })
+    }
+
+    
+    if (btn === "buttonOd") {
+      componentToCopy.map(test => {
         if (test.od.value !== "" && test.show) {
           inputText += `${test.name}: ${test.od.value}\n`
         }
       })
-    } else if (id === "buttonOs") {
-      testArray.map(test => {
+    } else if (btn === "buttonOs") {
+      componentToCopy.map(test => {
         if (test.os.value !== "" && test.show) {
           inputText += `${test.name}: ${test.os.value}\n`
         }
       })
     }
-    showModal();
-    copyContent(inputText);
+    copyContent(inputText.trim());
   }
 
-  const handleReset = (e, id) => {
+  const handleReset = (e, btn, id) => {
     e.preventDefault();
-    let testArray = [...tests];
-    if (id === "resetOd") {
-      testArray.forEach(test => {
+    let componentToReset;
+    const testObject = {...tests}
+
+    for (const key in testObject) {
+      testObject[key].filter(test => {
+        if (test.id === id) {
+          componentToReset = testObject[key]
+        }  
+      })
+    }
+    if (btn === "resetOd") {
+      componentToReset.forEach(test => {
         test.od.value = ""
       })
-    } else if (id === "resetOs") {
-      testArray.forEach(test => {
+    } else if (btn === "resetOs") {
+      componentToReset.forEach(test => {
         test.os.value = ""
       })
     }
-    setTests(testArray);
+    setTests(testObject);
   }
 
-  const showModal = () => {
-    setModalVisible(true);
-    setTimeout(() => {
-      setModalVisible(false);
-    }, 2000);
-  };
+ 
 
   
   const handleLensPrice = (e, id, index) => {
@@ -331,20 +356,31 @@ function App() {
       </button>
     </div>
     {route === "template" &&
-      <>
+      <div className='mb-28'>
       <h1 className='text-center text-3xl mb-5 mt-28'>
         Anterior
       </h1>
-        <Anterior 
+        <Template 
           handleUserInputChange={handleUserInputChange}
           handleTestChange={handleTestChange}
           handleCopyTest={handleCopyTest}
           handleReset={handleReset}
-          showModal={showModal}
-          modalVisible={modalVisible} 
-          tests={[...tests]}  
+          tests={[...tests.anterior]}  
         />
-        </>}
+      <h1 className='text-center text-3xl mb-5 mt-28'>
+        Posterior
+      </h1>
+        <Template 
+          handleUserInputChange={handleUserInputChange}
+          handleTestChange={handleTestChange}
+          handleCopyTest={handleCopyTest}
+          handleReset={handleReset}
+          tests={[...tests.posterior]}  
+        />
+        <br/>
+        <br/>
+        <br/>
+        </div>}
       {route === "calculator" &&
       <>
       <h4 className='text-center text-3xl mb-5 mt-32'>
@@ -430,122 +466,219 @@ function App() {
 
 export default App
 
-const sampleTests = [
-  {
-    id: uuidv4(),
-    name: "Konjunktival rødhet",
-    show: true,
-    od: {
+const sampleTests = {
+  anterior: 
+  [
+    {
       id: uuidv4(),
-      value: ""  
+      name: "Konjunktival rødhet",
+      show: true,
+      od: {
+        id: uuidv4(),
+        value: ""  
+      },
+      os: {
+        id: uuidv4(),
+        value: ""
+      }
     },
-    os: {
+    {
       id: uuidv4(),
-      value: ""
-    }
-  },
-  {
-    id: uuidv4(),
-    name: "Limbal rødhet",
-    show: true,
-    od: {
-      id: uuidv4(),
-      value: ""  
+      name: "Limbal rødhet",
+      show: true,
+      od: {
+        id: uuidv4(),
+        value: ""  
+      },
+      os: {
+        id: uuidv4(),
+        value: ""
+      }
     },
-    os: {
+    {
       id: uuidv4(),
-      value: ""
-    }
-  },
-  {
-    id: uuidv4(),
-    name: "Palpebral rødhet",
-    show: true,
-    od: {
-      id: uuidv4(),
-      value: ""  
+      name: "Palpebral rødhet",
+      show: true,
+      od: {
+        id: uuidv4(),
+        value: ""  
+      },
+      os: {
+        id: uuidv4(),
+        value: ""
+      }
     },
-    os: {
+    {
       id: uuidv4(),
-      value: ""
-    }
-  },
-  {
-    id: uuidv4(),
-    name: "Palpebral ruhet",
-    show: true,
-    od: {
-      id: uuidv4(),
-      value: ""  
+      name: "Palpebral ruhet",
+      show: true,
+      od: {
+        id: uuidv4(),
+        value: ""  
+      },
+      os: {
+        id: uuidv4(),
+        value: ""
+      }
     },
-    os: {
+    {
       id: uuidv4(),
-      value: ""
-    }
-  },
-  {
-    id: uuidv4(),
-    name: "Meibomske kjertler",
-    show: true,
-    od: {
-      id: uuidv4(),
-      value: ""  
+      name: "Meibomske kjertler",
+      show: true,
+      od: {
+        id: uuidv4(),
+        value: ""  
+      },
+      os: {
+        id: uuidv4(),
+        value: ""
+      }
     },
-    os: {
+    {
       id: uuidv4(),
-      value: ""
-    }
-  },
-  {
-    id: uuidv4(),
-    name: "Blefaritt",
-    show: true,
-    od: {
-      id: uuidv4(),
-      value: ""  
+      name: "Blefaritt",
+      show: true,
+      od: {
+        id: uuidv4(),
+        value: ""  
+      },
+      os: {
+        id: uuidv4(),
+        value: ""
+      }
     },
-    os: {
+    {
       id: uuidv4(),
-      value: ""
-    }
-  },
-  {
-    id: uuidv4(),
-    name: "Neovaskularisering",
-    show: true,
-    od: {
-      id: uuidv4(),
-      value: ""  
+      name: "Neovaskularisering",
+      show: true,
+      od: {
+        id: uuidv4(),
+        value: ""  
+      },
+      os: {
+        id: uuidv4(),
+        value: ""
+      }
     },
-    os: {
+    {
       id: uuidv4(),
-      value: ""
-    }
-  },
-  {
-    id: uuidv4(),
-    name: "Kornea",
-    show: true,
-    od: {
-      id: uuidv4(),
-      value: ""  
+      name: "Kornea",
+      show: true,
+      od: {
+        id: uuidv4(),
+        value: ""  
+      },
+      os: {
+        id: uuidv4(),
+        value: ""
+      }
     },
-    os: {
+    {
       id: uuidv4(),
-      value: ""
-    }
-  },
-  {
-    id: uuidv4(),
-    name: "Kommentar",
-    show: true,
-    od: {
+      name: "Kommentar",
+      show: true,
+      od: {
+        id: uuidv4(),
+        value: ""  
+      },
+      os: {
+        id: uuidv4(),
+        value: ""
+      }
+    }  
+  ],
+  posterior: 
+  [
+    {
       id: uuidv4(),
-      value: ""  
+      name: "C/D",
+      show: true,
+      od: {
+        id: uuidv4(),
+        value: ""  
+      },
+      os: {
+        id: uuidv4(),
+        value: ""
+      }
     },
-    os: {
+    {
       id: uuidv4(),
-      value: ""
-    }
-  },
-]
+      name: "Papille",
+      show: true,
+      od: {
+        id: uuidv4(),
+        value: ""  
+      },
+      os: {
+        id: uuidv4(),
+        value: ""
+      }
+    },
+    {
+      id: uuidv4(),
+      name: "A/V",
+      show: true,
+      od: {
+        id: uuidv4(),
+        value: ""  
+      },
+      os: {
+        id: uuidv4(),
+        value: ""
+      }
+    },
+    {
+      id: uuidv4(),
+      name: "Makula",
+      show: true,
+      od: {
+        id: uuidv4(),
+        value: ""  
+      },
+      os: {
+        id: uuidv4(),
+        value: ""
+      }
+    },
+    {
+      id: uuidv4(),
+      name: "Linse",
+      show: true,
+      od: {
+        id: uuidv4(),
+        value: ""  
+      },
+      os: {
+        id: uuidv4(),
+        value: ""
+      }
+    },
+    {
+      id: uuidv4(),
+      name: "OCT-wide",
+      show: true,
+      od: {
+        id: uuidv4(),
+        value: ""  
+      },
+      os: {
+        id: uuidv4(),
+        value: ""
+      }
+    },
+    {
+      id: uuidv4(),
+      name: "Kommentar",
+      show: true,
+      od: {
+        id: uuidv4(),
+        value: ""  
+      },
+      os: {
+        id: uuidv4(),
+        value: ""
+      }
+    }  
+  ]
+}

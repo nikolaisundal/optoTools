@@ -15,7 +15,7 @@ export default function Efron({id, name, eye, handleUserInputChange}) {
             id={id} 
             name={name}
             value={eye.value}
-            onChange={(e) =>handleUserInputChange(e, eye.id)}
+            onChange={(e) =>handleUserInputChange(e, eye.id, id)}
             rows="2" 
             cols="50">
           </textarea>
@@ -35,7 +35,7 @@ export default function Efron({id, name, eye, handleUserInputChange}) {
               id={id}
               name={name}
               value={eye.value}
-              onChange={(e) =>handleUserInputChange(e, eye.id)}   
+              onChange={(e) =>handleUserInputChange(e, eye.id, id)}   
               />
       </div>
     </>
