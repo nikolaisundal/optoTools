@@ -62,7 +62,7 @@ export default function Template(props) {
               />
             ))}                
           </div>
-        <div className='flex content-center justify-center w-full gap-8 my-4'>
+        <div className='flex content-center justify-center w-full gap-8 my-6'>
         <button 
           className='bg-green-800 text-slate-50 p-2 rounded w-20'
           onClick={(e) => {
@@ -73,7 +73,7 @@ export default function Template(props) {
           Kopier!
         </button>
         <button 
-          className='bg-orange-300 text-black p-2 rounded w-20'
+          className='bg-green-800 text-slate-50 p-2 rounded w-20'
           onClick={(e) => handleReset(e, "resetOd", tests[0].id)}
         > 
           Reset
@@ -93,7 +93,7 @@ export default function Template(props) {
               />
             ))}                
           </div>
-        <div className='flex content-center justify-center w-full gap-8 my-4'>
+        <div className='flex content-center justify-center w-full gap-8 my-6'>
           <button 
             className='bg-green-800 text-slate-50 p-2 rounded w-20'
             onClick={(e) => {
