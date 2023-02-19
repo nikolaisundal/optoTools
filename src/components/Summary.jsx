@@ -26,32 +26,32 @@ export default function Summary(props) {
           {synstest
               ?
             <tr className="text-left">
-              <td className="border-2 border-green-800 px-4 py-2">
+              <td className="border-2 border-black px-4 py-2">
                 Synstest
               </td>
-              <td className="border-2 border-green-800 px-4 py-2">
+              <td className="border-2 border-black px-4 py-2">
                 685 kr
               </td>
-              <td className="border-2 border-green-800 px-4 py-2">
+              <td className="border-2 border-black px-4 py-2">
               </td>
             </tr>
               : null}  
             <tr className="text-left">
-              <td className="border-2 border-green-800 px-4 py-2">
+              <td className="border-2 border-black px-4 py-2">
                 {(frameName === "" && framePrice <=1395)
                   ? "Innfatning: specsavers"
                   :(frameName === "" && framePrice >1395)
                   ? "Innfatning: designer"
                   : `Innfatning: ${frameName}`}
               </td>
-              <td className="border-2 border-green-800 px-4 py-2">
+              <td className="border-2 border-black px-4 py-2">
                 {(offerSelect === "NAV" && framePrice > 295) 
                   ? `${framePrice-295} kr` 
                   : (offerSelect !== "NAV")
                   ? `${framePrice} kr` 
                   : "0 kr"}
               </td>
-              <td className="border-2 border-green-800 px-4 py-2">
+              <td className="border-2 border-black px-4 py-2">
                 {(offerSelect === "ToForEnUV" && id === cheapestId)
                   ? `-${framePrice} kr` 
                   : null} 
@@ -70,24 +70,24 @@ export default function Summary(props) {
             {(offerSelect === "NAV")
               ?
             <tr className="text-left">
-              <td className="border-2 border-green-800 px-4 py-2">
+              <td className="border-2 border-black px-4 py-2">
                 Brilletilpasning
               </td>
-              <td className="border-2 border-green-800 px-4 py-2">
+              <td className="border-2 border-black px-4 py-2">
                 {framePrice >= 295 ? `${295} kr` : `${0} kr` }  
               </td>
-              <td className="border-2 border-green-800 px-4 py-2">
+              <td className="border-2 border-black px-4 py-2">
               </td>
             </tr>
               : null}
             <tr className="text-left">
-              <td className="border-2 border-green-800 px-4 py-2">
+              <td className="border-2 border-black px-4 py-2">
                 {`Glass: ${lensType}`}
               </td>
-              <td className="border-2 border-green-800 px-4 py-2">
+              <td className="border-2 border-black px-4 py-2">
                 {`${lensPrice} kr`}
               </td>
-              <td className="border-2 border-green-800 px-4 py-2">
+              <td className="border-2 border-black px-4 py-2">
                 {(offerSelect === "ToForEnUV" && id === cheapestId) 
                   ? `-${lensPrice} kr` 
                   : null} 

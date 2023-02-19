@@ -425,8 +425,8 @@ function App() {
           comment={personalia.comment}
           handlePersonaliaChange={handlePersonaliaChange}
         />
-        <div className="w-[794px] h-[1123px] bg-white mx-auto mt-16 rounded">
-        <div ref={componentRef} className="p-6">
+        <div className="md:w-[794px] md:h-[1123px] bg-white mx-auto mt-16 rounded">
+        <div ref={componentRef} className="p-6 pt-40">
           <Personalia
             personalia={personalia}
             />
@@ -456,7 +456,7 @@ function App() {
             Total: {specPrice.total > 0 ? specPrice.total: 0}kr
           </div>
           <p className='font-bold mt-20 text-center'>Kommentar: </p>
-          <div className='text-center mt-4 w-3/4 border-2 border-solid h-auto mx-auto break-words'>
+          <div className='text-center mt-4 w-3/4 border-2 border-black h-auto mx-auto break-words'>
             <p className='text-left p-3'>{personalia.comment}</p>
           </div>
         </div>
