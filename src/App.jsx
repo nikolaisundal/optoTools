@@ -9,6 +9,7 @@ import Eye from './components/Eye';
 import Summary from './components/Summary';
 import Personalia from './components/Personalia';
 import PersonaliaInput from './components/PersonaliaInput';
+import CommentInput from './CommentInput';
 
 
 import  lens  from './assets/lensPrices.jsx'
@@ -53,7 +54,9 @@ function App() {
   const [specPrice, setSpecPrice] = useState(initialState)
   const [personalia, setPersonalia] = useState({
     name: "",
-    birthDate: ""
+    birthDate: "",
+    address: "",
+    comment: ""
   })
   
   const inputRefArray = [useRef(), useRef()]
@@ -337,13 +340,13 @@ function App() {
   return (
     <>
     <div className="mt-4">
-    <div className="flex absolute top-12 left-6 bg-purple-400 rounded-md shadow-2xl">
+    <div className="hidden sm:flex absolute top-12 left-6 bg-purple-400 rounded-md shadow-2xl">
       <Eye className="cursor-pointer pr-2" />
       <Eye className="cursor-pointer pl-2" />
       <div className='text-lg px-1'>optoTools</div>
     </div>
     </div>
-    <div className='text-right mb-10'>
+    <div className='text-center sm:text-right mb-10'>
       <button className='text-xl mr-4 hover:underline'
         id="calculator"
         onClick={(e)=> handleRouteChange(e)}>
@@ -390,21 +393,20 @@ function App() {
           handleOfferChange={handleOfferChange}
         />
         <PersonaliaInput
-          name={personalia.name}
-          birthDate={personalia.birthDate}
+          personalia={personalia}
           handlePersonaliaChange={handlePersonaliaChange}
         />
-          <Calculator
-            index={0} 
-            handleFramePriceChange={handleFramePriceChange}
-            handleFrameNameChange={handleFrameNameChange}
-            handleLensPriceChange={handleLensPriceChange} 
-            handleOnRemove={handleOnRemove}
-            handleLensPrice={handleLensPrice}
-            options={options}
-            specPrice={specPrice.specNum1}
-            inputRefArray={inputRefArray[0]}
-            />
+        <Calculator
+          index={0} 
+          handleFramePriceChange={handleFramePriceChange}
+          handleFrameNameChange={handleFrameNameChange}
+          handleLensPriceChange={handleLensPriceChange} 
+          handleOnRemove={handleOnRemove}
+          handleLensPrice={handleLensPrice}
+          options={options}
+          specPrice={specPrice.specNum1}
+          inputRefArray={inputRefArray[0]}
+          />
       {(offerSelect === "ToForEn" || offerSelect === "ToForEnUV")&&
         <>    
           <Calculator
@@ -419,13 +421,17 @@ function App() {
             inputRefArray={inputRefArray[1]}
           />
         </>}
-        <div ref={componentRef}>
+        <CommentInput 
+          comment={personalia.comment}
+          handlePersonaliaChange={handlePersonaliaChange}
+        />
+        <div className="w-[794px] h-[1123px] bg-white mx-auto mt-16 rounded">
+        <div ref={componentRef} className="p-6">
           <Personalia
-            name={personalia.name}
-            birthDate={personalia.birthDate}
+            personalia={personalia}
             />
-          <h5 className='text-center mt-10 font-bold'>Brille 1:</h5>
-          <div className="flex justify-center mb-5">
+          <h5 className='text-center mt-14 font-bold'>Brille 1:</h5>
+          <div className="flex justify-center mb-10">
             <Summary 
               specPrice={specPrice.specNum1}
               offerSelect={offerSelect}
@@ -449,9 +455,14 @@ function App() {
           <div className='text-center mt-5 mb-6 font-bold'>
             Total: {specPrice.total > 0 ? specPrice.total: 0}kr
           </div>
+          <p className='font-bold mt-20 text-center'>Kommentar: </p>
+          <div className='text-center mt-4 w-3/4 border-2 border-solid h-auto mx-auto break-words'>
+            <p className='text-left p-3'>{personalia.comment}</p>
+          </div>
+        </div>
         </div>
         <div className='flex justify-center mb-40'>
-          <button className='bg-green-800 text-slate-50 p-2 rounded w-20'
+          <button className='bg-green-800 text-slate-50 p-2 rounded mt-4 w-20'
             onClick={handlePrint}>
               Skriv ut
           </button>

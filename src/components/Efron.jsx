@@ -4,7 +4,7 @@ export default function Efron({id, name, eye, handleUserInputChange}) {
   return (
     (name === "Kornea" || name === "Kommentar") ?
     <>      
-      <div className='flex items-center'>
+      <div className='flex items-center justify-center sm:justify-start'>
         <label className='text-gray-800 font-bold mb-1 whitespace-nowrap mr-2' 
           htmlFor={name}>{name}:
         </label>
@@ -22,7 +22,7 @@ export default function Efron({id, name, eye, handleUserInputChange}) {
       </div>    
     </>:
     <>   
-      <div className='flex items-center'>
+      <div className='flex items-center justify-center sm:justify-start'>
           <label 
               className='text-gray-800 font-bold mb-1 whitespace-nowrap mr-2' 
               htmlFor={name}>{name}:

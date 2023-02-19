@@ -54,12 +54,13 @@ export default function Calculator(props) {
           </div>
           <div className='flex items-center col-span-3'> 
             <Multiselect
-              className='bg-slate-50 appearance-none border-2 border-gray-200 rounded-lg text-gray-700 leading-tight' 
+              className='bg-slate-50 appearance-none border-2 w-full s:w-[20rem] md:w-[22rem] lg:w-[38rem] xl:w-[43rem] border-gray-200 rounded-lg text-gray-700 leading-tight' 
               options={options}
               selectionLimit="1"
               displayValue="type"
               groupBy="cat"
               placeholder='Velg glass'
+              hidePlaceholder='true'
               onSelect={(e) => handleLensPrice(e, specPrice.id, index)}
               onRemove={(e) => handleOnRemove(e, specPrice.id)}
               selectedValues={specPrice.id === 2 && specPrice.lensType !== "" ?
@@ -71,7 +72,6 @@ export default function Calculator(props) {
               style={{
                 searchBox: {
                   border: 'none',
-                  width: "43rem"
                 },
                 chips: { 
 	                background: "rgb(22 101 52)"}

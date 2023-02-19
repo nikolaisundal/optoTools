@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function Checkboxes({test, handleTestChange}) {
   return (
-    <div className="mx-2">
+    <div className="mx-2 px-3">
         <input
           className='m-2'
           type="checkbox"

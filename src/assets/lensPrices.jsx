@@ -290,6 +290,12 @@ const lens = [
       cat: "Standard" 
     },
     {
+      type: "1.5 Standard UCSC",
+      id: uuidv4(),
+      price: 1800,
+      cat: "Standard" 
+    },
+    {
       type: "1.6 Standard UCL",
       id: uuidv4(),
       price: 2100,

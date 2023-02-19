@@ -33,10 +33,13 @@ export default function Template(props) {
     <div>
     <div className="flex content-center justify-center w-full mb-5">
       <form>
-        <div className='w-52'>
-          <Select handleSelectShow={handleSelectShow}/>
+        <div className=''>
+          <Select 
+            handleSelectShow={handleSelectShow}
+            showSelect={showSelect}
+            />
           {showSelect ?
-            <div className='bg-white'>
+            <div className='bg-white rounded-b'>
             {tests.map(test => (
                       <Checkboxes
                         key={test.id}
@@ -48,10 +51,10 @@ export default function Template(props) {
         </div>
       </form>
     </div>
-    <div className='flex justify-center'>
-      <form className='w-50 mx-3'>
+    <div className='flex flex-col xl:flex-row justify-center'>
+      <form className='mx-3'>
         <h2 className='text-lg text-center mb-3 font-bold'>OD:</h2>
-          <div className='grid grid-cols-4 gap-3'>
+          <div className='grid grid-cols-1 sm:grid-cols-4 gap-3'>
             {renderedTests.map(test => (
               <Efron 
                 key={test.id}
@@ -66,7 +69,7 @@ export default function Template(props) {
         <button 
           className='bg-green-800 text-slate-50 p-2 rounded w-20'
           onClick={(e) => {
-              handleCopyTest(e, "buttonOs", tests[0].id)
+              handleCopyTest(e, "buttonOd", tests[0].id)
               showModal()  
             }}
         > 
@@ -80,9 +83,9 @@ export default function Template(props) {
         </button>
       </div>    
       </form>
-      <form className='w-50 mx-3'>
+      <form className='mx-3'>
         <h3 className='text-lg text-center mb-3 font-bold'>OS:</h3>
-          <div className='grid grid-cols-4 gap-3'>
+          <div className='grid grid-cols-1 sm:grid-cols-4 gap-3'>
             {renderedTests.map(test => (
               <Efron 
                 key={test.id}
