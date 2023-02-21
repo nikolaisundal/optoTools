@@ -4,7 +4,7 @@ export default function Checkboxes({test, handleTestChange}) {
   return (
     <div className="mx-2 px-3">
         <input
-          className='m-2'
+          className='m-2 cursor-pointer'
           type="checkbox"
           id={test.id}
           name={test.name}

@@ -61,6 +61,7 @@ export default function Template(props) {
                 id={test.id}
                 name={test.name}
                 eye={test.od}
+                img={test.img}
                 handleUserInputChange={handleUserInputChange}   
               />
             ))}                
@@ -92,6 +93,7 @@ export default function Template(props) {
                 id={test.id}
                 name={test.name}
                 eye={test.os}
+                img={test.img}
                 handleUserInputChange={handleUserInputChange}   
               />
             ))}                

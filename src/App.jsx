@@ -469,8 +469,6 @@ function App() {
         </div>
         </>} 
         </>
-    
-    
   )
 }
 
@@ -491,7 +489,8 @@ const sampleTests = {
       os: {
         id: uuidv4(),
         value: ""
-      }
+      },
+      img: "src/assets/Konjunktival_rødhet.png" 
     },
     {
       id: uuidv4(),
@@ -504,7 +503,8 @@ const sampleTests = {
       os: {
         id: uuidv4(),
         value: ""
-      }
+      },
+      img: "src/assets/Limbal_rødhet.png"
     },
     {
       id: uuidv4(),
@@ -530,7 +530,8 @@ const sampleTests = {
       os: {
         id: uuidv4(),
         value: ""
-      }
+      },
+      img: "src/assets/Palpebral_ruhet.png"
     },
     {
       id: uuidv4(),
@@ -543,7 +544,8 @@ const sampleTests = {
       os: {
         id: uuidv4(),
         value: ""
-      }
+      },
+      img: "src/assets/Meibomske.png"
     },
     {
       id: uuidv4(),
@@ -556,7 +558,8 @@ const sampleTests = {
       os: {
         id: uuidv4(),
         value: ""
-      }
+      },
+      img: "src/assets/Blefaritt.png"
     },
     {
       id: uuidv4(),
@@ -569,7 +572,8 @@ const sampleTests = {
       os: {
         id: uuidv4(),
         value: ""
-      }
+      },
+      img: "src/assets/Neovaskularisering.png"
     },
     {
       id: uuidv4(),

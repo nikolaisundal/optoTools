@@ -21,8 +21,10 @@ export default function Calculator(props) {
 
   useEffect(() => {
     const handleResize = (ref) => {
+      if (ref.current) {
       setWidth(ref.current.clientWidth);
-    };
+    }
+  };
     handleResize(inputRefWidth);
     window.addEventListener('resize', () => handleResize(inputRefWidth));
     return () => {
@@ -30,7 +32,7 @@ export default function Calculator(props) {
     };
   }, []);
   
-  console.log(width)
+  
   return (
     <>
     <div className='w-full justify-center flex mb-3'>
