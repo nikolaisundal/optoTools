@@ -45,7 +45,7 @@ export default function Efron({id, name, eye, handleUserInputChange, img}) {
           {isHovering && img &&(
         <img
           className="absolute top-10 left-0 z-10"
-          src={img}
+          src={import.meta.env.BASE_URL + img}
           alt={name}
         />)}
       </div>
