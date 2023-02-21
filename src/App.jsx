@@ -490,7 +490,7 @@ const sampleTests = {
         id: uuidv4(),
         value: ""
       },
-      img: "../src/assets/konjunktivalrodhet.png" 
+      img: "./assets/konjunktivalrodhet.png" 
     },
     {
       id: uuidv4(),
@@ -504,7 +504,7 @@ const sampleTests = {
         id: uuidv4(),
         value: ""
       },
-      img: "../src/assets/limbalrodhet.png"
+      img: "./assets/limbalrodhet.png"
     },
     {
       id: uuidv4(),
@@ -531,7 +531,7 @@ const sampleTests = {
         id: uuidv4(),
         value: ""
       },
-      img: "../src/assets/palpebralruhet.png"
+      img: "./assets/palpebralruhet.png"
     },
     {
       id: uuidv4(),
@@ -545,7 +545,7 @@ const sampleTests = {
         id: uuidv4(),
         value: ""
       },
-      img: "../src/assets/meibomske.png"
+      img: "./assets/meibomske.png"
     },
     {
       id: uuidv4(),
@@ -559,7 +559,7 @@ const sampleTests = {
         id: uuidv4(),
         value: ""
       },
-      img: "assets/blefaritt.png"
+      img: "./assets/blefaritt.png"
     },
     {
       id: uuidv4(),
@@ -573,7 +573,7 @@ const sampleTests = {
         id: uuidv4(),
         value: ""
       },
-      img: "../src/assets/neovaskularisering.png"
+      img: "./assets/neovaskularisering.png"
     },
     {
       id: uuidv4(),
