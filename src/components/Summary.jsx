@@ -17,6 +17,7 @@ export default function Summary(props) {
         <table className="table-auto">
           <thead>
             <tr className="text-left">
+              <th className="px-4 py-2"></th>
               <th className="px-4 py-2">Produkt:</th>
               <th className="px-4 py-2">Pris:</th>
               <th className="px-4 py-2">Rabatt:</th>
@@ -26,6 +27,7 @@ export default function Summary(props) {
           {synstest
               ?
             <tr className="text-left">
+              <td></td>
               <td className="border-2 border-black px-4 py-2">
                 Synstest
               </td>
@@ -35,14 +37,20 @@ export default function Summary(props) {
               <td className="border-2 border-black px-4 py-2">
               </td>
             </tr>
-              : null}  
+              : null}
+                
             <tr className="text-left">
+            <div className='relative'>
+              <td className="font-bold pr-1 absolute top-2 right-2">
+                Innfatning:
+              </td>
+            </div>  
               <td className="border-2 border-black px-4 py-2">
                 {(frameName === "" && framePrice <=1395)
-                  ? "Innfatning: specsavers"
+                  ? "Specsavers"
                   :(frameName === "" && framePrice >1395)
-                  ? "Innfatning: designer"
-                  : `Innfatning: ${frameName}`}
+                  ? "Designer"
+                  : frameName}
               </td>
               <td className="border-2 border-black px-4 py-2">
                 {(offerSelect === "NAV" && framePrice > 295) 
@@ -70,6 +78,7 @@ export default function Summary(props) {
             {(offerSelect === "NAV")
               ?
             <tr className="text-left">
+              <td></td>
               <td className="border-2 border-black px-4 py-2">
                 Brilletilpasning
               </td>
@@ -81,8 +90,13 @@ export default function Summary(props) {
             </tr>
               : null}
             <tr className="text-left">
+            <div className='relative'>
+              <td className="font-bold pr-1 absolute top-2 right-12">
+                Glass:
+              </td>
+            </div>
               <td className="border-2 border-black px-4 py-2">
-                {`Glass: ${lensType}`}
+                {lensType.replace(",", ".")}
               </td>
               <td className="border-2 border-black px-4 py-2">
                 {`${lensPrice} kr`}

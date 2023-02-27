@@ -32,7 +32,7 @@ export default function Template(props) {
   return (
     <div>
     <div className="flex content-center justify-center w-full mb-5">
-      <form>
+      <form autoComplete='off'>
         <div className=''>
           <Select 
             handleSelectShow={handleSelectShow}

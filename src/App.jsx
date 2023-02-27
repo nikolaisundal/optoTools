@@ -47,7 +47,7 @@ function App() {
   }
 
   
-  const [route, setRoute] = useState("template")
+  const [route, setRoute] = useState("calculator")
   const [offerSelect, setOfferSelect] = useState("ToForEnUV")
   const [options] = useState(lens)
   const [synstest, setSynstest] = useState(false)
@@ -180,8 +180,10 @@ function App() {
   } 
 
   const handleUserInputChange = (e, eyeId, testID) => {
+    e.preventDefault();
     const testObject = {...tests}
     let selectedTest;
+    console.log(e)
     for (const key in testObject) {
       testObject[key].filter(test => {
         if (test.id === testID) {
@@ -190,12 +192,14 @@ function App() {
       })
     }
     for (const key in selectedTest) {
+      
       if(selectedTest[key].id === eyeId) {
         selectedTest[key].value = e.target.value
       }  
     } 
     setTests(testObject)
   }
+
 
   const copyContent = async (text) => {
     if ('clipboard' in navigator) {
@@ -425,12 +429,12 @@ function App() {
           comment={personalia.comment}
           handlePersonaliaChange={handlePersonaliaChange}
         />
-        <div className="md:w-[794px] md:h-[1123px] bg-white mx-auto mt-16 rounded">
+        <div className="md:w-[794px] md:h-[1123px] bg-white mx-auto mt-16 rounded relative">
         <div ref={componentRef} className="p-6 pt-40">
           <Personalia
             personalia={personalia}
             />
-          <h5 className='text-center mt-14 font-bold'>Brille 1:</h5>
+          <h5 className='text-center mt-14 font-bold underline'>Brille 1:</h5>
           <div className="flex justify-center mb-10">
             <Summary 
               specPrice={specPrice.specNum1}
@@ -441,7 +445,7 @@ function App() {
           </div>
           {(offerSelect === "ToForEn" || offerSelect === "ToForEnUV") ?
           <>
-          <h6 className='text-center font-bold'>Brille 2:</h6>
+          <h6 className='text-center font-bold underline'>Brille 2:</h6>
           <div className="flex justify-center mb-10">
             <Summary 
               specPrice={specPrice.specNum2}
@@ -455,10 +459,11 @@ function App() {
           <div className='text-center mt-5 mb-6 font-bold'>
             Total: {specPrice.total > 0 ? specPrice.total: 0}kr
           </div>
-          <p className='font-bold mt-20 text-center'>Kommentar: </p>
-          <div className='text-center mt-4 w-3/4 border-2 border-black h-auto mx-auto break-words'>
+          <p className='font-bold mt-16 text-center'>Kommentar: </p>
+          <div className='text-center mt-4 w-3/4 border border-black min-h-[80px] h-auto mx-auto break-words'>
             <p className='text-left p-3'>{personalia.comment}</p>
           </div>
+          <p className='absolute bottom-5 left-5 '> sign. ______________________</p>
         </div>
         </div>
         <div className='flex justify-center mb-40'>
