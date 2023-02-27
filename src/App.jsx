@@ -183,7 +183,6 @@ function App() {
     e.preventDefault();
     const testObject = {...tests}
     let selectedTest;
-    console.log(e)
     for (const key in testObject) {
       testObject[key].filter(test => {
         if (test.id === testID) {
