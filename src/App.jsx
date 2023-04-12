@@ -13,6 +13,8 @@ import CommentInput from './components/CommentInput';
 
 
 import  lens  from './assets/lensPrices.jsx'
+import skuPrices from './assets/SkuPrices';
+
 
 
 const LOCAL_STORAGE_KEY = "optoTools.tests"
@@ -50,6 +52,7 @@ function App() {
   const [route, setRoute] = useState("calculator")
   const [offerSelect, setOfferSelect] = useState("ToForEnUV")
   const [options] = useState(lens)
+  const [options2] = useState(skuPrices)
   const [synstest, setSynstest] = useState(false)
   const [specPrice, setSpecPrice] = useState(initialState)
   const [personalia, setPersonalia] = useState({
@@ -221,9 +224,7 @@ function App() {
           componentToCopy = testObject[key]
         }  
       })
-    }
-
-    
+    } 
     if (btn === "buttonOd") {
       componentToCopy.map(test => {
         if (test.od.value !== "" && test.show) {
@@ -313,6 +314,7 @@ function App() {
 
   const handleFrameNameChange = (e, id) => {
     let specPriceCopy = {...specPrice}
+    console.log(e)
     if ( id === 1) {
       specPriceCopy.specNum1.frameName = e.target.value
     } else {
@@ -320,7 +322,7 @@ function App() {
     }
     setSpecPrice(specPriceCopy)
   }
-  
+
   const handleFramePriceChange = (e, id) => {
     let specPriceCopy = {...specPrice}
     let num = Number(e.target.value)
@@ -331,6 +333,34 @@ function App() {
       specPriceCopy.specNum1.framePrice = num
     } else {
       specPriceCopy.specNum2.framePrice = num
+    }
+    setSpecPrice(specPriceCopy)
+    handleCalculateTotal()
+  }
+
+  const handleFrameNameOnSelect = (e, id) => {
+    let specPriceCopy = {...specPrice}
+    let name = e[0].type
+    let price = Number(e[0].price) 
+    if (id === 1) {
+      specPriceCopy.specNum1.frameName = name
+      specPriceCopy.specNum1.framePrice = price
+    } else {
+      specPriceCopy.specNum2.frameName = name
+      specPriceCopy.specNum2.framePrice = price
+    }
+    setSpecPrice(specPriceCopy)
+    handleCalculateTotal()
+  }
+
+  const handleFrameNameOnRemove = (e, id) => {
+    let specPriceCopy = {...specPrice}
+    if (id === 1) {
+      specPriceCopy.specNum1.frameName = ""
+      specPriceCopy.specNum1.framePrice = 0
+    } else {
+      specPriceCopy.specNum2.frameName = ""
+      specPriceCopy.specNum2.framePrice = 0
     }
     setSpecPrice(specPriceCopy)
     handleCalculateTotal()
@@ -392,6 +422,8 @@ function App() {
       <h4 className='text-center text-3xl mb-5 mt-32'>
         Brillekalkulator
       </h4>
+      <div className='flex justify-center w-full'>
+        <div className='w-[1000px]'>
         <RadioRow
           handleOfferChange={handleOfferChange}
         />
@@ -403,10 +435,13 @@ function App() {
           index={0} 
           handleFramePriceChange={handleFramePriceChange}
           handleFrameNameChange={handleFrameNameChange}
+          handleFrameNameOnSelect={handleFrameNameOnSelect}
+          handleFrameNameOnRemove={handleFrameNameOnRemove}
           handleLensPriceChange={handleLensPriceChange} 
           handleOnRemove={handleOnRemove}
           handleLensPrice={handleLensPrice}
           options={options}
+          options2={options2}
           specPrice={specPrice.specNum1}
           inputRefArray={inputRefArray[0]}
           />
@@ -416,10 +451,13 @@ function App() {
             index={1}  
             handleFramePriceChange={handleFramePriceChange}
             handleFrameNameChange={handleFrameNameChange}
-            handleLensPriceChange={handleLensPriceChange} 
+            handleLensPriceChange={handleLensPriceChange}
+            handleFrameNameOnSelect={handleFrameNameOnSelect}
+            handleFrameNameOnRemove={handleFrameNameOnRemove} 
             handleOnRemove={handleOnRemove}
             handleLensPrice={handleLensPrice}
             options={options}
+            options2={options2}
             specPrice={specPrice.specNum2}
             inputRefArray={inputRefArray[1]}
           />
@@ -428,6 +466,13 @@ function App() {
           comment={personalia.comment}
           handlePersonaliaChange={handlePersonaliaChange}
         />
+        <div className='text-center font-bold'>
+          Total: {specPrice.total}
+        </div>
+        </div>
+      
+      </div>
+        
         <div className="md:w-[794px] md:h-[1123px] bg-white mx-auto mt-16 rounded relative">
         <div ref={componentRef} className="p-6 pt-40">
           <Personalia
@@ -466,7 +511,7 @@ function App() {
         </div>
         </div>
         <div className='flex justify-center mb-40'>
-          <button className='bg-green-800 text-slate-50 p-2 rounded mt-4 w-20'
+          <button className='bg-green-800 text-slate-50 p-2 rounded mt-8 w-20'
             onClick={handlePrint}>
               Skriv ut
           </button>

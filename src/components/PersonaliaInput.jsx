@@ -2,17 +2,17 @@ import React from 'react'
 
 export default function PersonaliaInput({personalia:{address, name, birthDate, comment}, handlePersonaliaChange}) {
   return (
-    <div className='w-full justify-center flex mb-8'>
-        <form>
-            <div className='flex flex-row'>
-                <div className='grid md:grid-cols-9 gap-3 mb-3'>
-                    <div className='flex items-center col-span-3 md:col-span-1 lg:col-span-1'>
+    <form>
+            <div className='flex mx-auto flex-col w-[700px] mb-8'>
+            <div className='w-[652px] mx-auto'>
+            <div className='flex flex-row mb-2'>
+                    <div className='w-32'>
                         <label 
-                            className='text-gray-800 font-bold mb-1 whitespace-nowrap mr-2' 
+                            className='text-gray-800 font-bold mb-1 whitespace-nowrap' 
                             htmlFor="name">Navn:
                         </label>
                     </div> 
-                    <div className='flex items-center col-span-2 mr-1'>
+                    <div className='w-96'>
                         <input 
                             className='appearance-none border-2 border-gray-200 rounded-lg w-full py-2 px-4 text-gray-700 leading-tight' 
                             type="text" 
@@ -22,13 +22,16 @@ export default function PersonaliaInput({personalia:{address, name, birthDate, c
                             onChange={(e)=> handlePersonaliaChange(e)}
                         />
                     </div>
-                    <div className='flex items-center col-span-3 md:col-span-1'>
+
+                </div>
+                <div className='flex flex-row mb-2'>    
+                    <div className='w-32'>
                         <label 
-                            className='text-gray-800 font-bold mb-1 whitespace-nowrap mr-2' 
+                            className='text-gray-800 font-bold mb-1 whitespace-nowrap' 
                             htmlFor="birthDate">Fødselsdato:
                         </label>
                     </div> 
-                    <div className='flex items-center col-span-2 '>    
+                    <div className='w-96'>    
                         <input 
                             className='appearance-none border-2 border-gray-200 rounded-lg w-full py-2 px-4 text-gray-700 leading-tight' 
                             type="text" 
@@ -38,13 +41,15 @@ export default function PersonaliaInput({personalia:{address, name, birthDate, c
                             onChange={(e)=> handlePersonaliaChange(e)}
                         />
                     </div>
-                    <div className='flex items-center col-span-3 md:col-span-1 lg:col-span-1'>
+                </div>
+                <div className='flex flex-row'>
+                    <div className='w-32'>
                         <label 
-                            className='text-gray-800 font-bold mb-1 whitespace-nowrap mr-2' 
+                            className='text-gray-800 font-bold mb-1 whitespace-nowrap' 
                             htmlFor="address">Adresse:
                         </label>
                     </div> 
-                    <div className='flex items-center col-span-2'>    
+                    <div className='w-96'>    
                         <input 
                             className='appearance-none border-2 border-gray-200 rounded-lg w-full py-2 px-4 text-gray-700 leading-tight' 
                             type="text" 
@@ -54,10 +59,11 @@ export default function PersonaliaInput({personalia:{address, name, birthDate, c
                             onChange={(e)=> handlePersonaliaChange(e)}
                             />
                     </div>
-                </div>              
+                </div>             
             </div>
-        </form>
-    </div>
+                 
+            </div>
+    </form>
   )
 }
 
