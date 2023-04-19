@@ -2,25 +2,35 @@
 @tailwind components;
 @tailwind utilities;
 
-*, *::after, *::before {
-    box-sizing: border-box;
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
 }
 
 * {
-    margin: 0;
-    padding: 0;      
+  margin: 0;
+  padding: 0;
 }
 
 body {
-    background: rgb(134 239 172)
+  background: rgb(134 239 172);
 }
 
 .animate-bounce {
-    animation-duration: 2s;
+  animation-duration: 2s;
 }
 
 .background_numscale_row {
-    background: rgb(31,255,0);
-    background: linear-gradient(90deg, rgba(31,255,0,0.6) 0%, rgba(251,240,0,0.6) 48%, rgba(255,0,0,0.6) 100%);
+  background: rgb(31, 255, 0);
+  background: linear-gradient(
+    90deg,
+    rgba(31, 255, 0, 0.6) 0%,
+    rgba(251, 240, 0, 0.6) 48%,
+    rgba(255, 0, 0, 0.6) 100%
+  );
 }
 
+.searchBox {
+  width: fit-content;
+}

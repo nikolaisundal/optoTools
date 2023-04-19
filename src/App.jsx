@@ -1,545 +1,550 @@
-import { useState, useEffect, useRef } from 'react'
-import { v4 as uuidv4 } from 'uuid';
-import { useReactToPrint } from 'react-to-print';
+import { useState, useEffect, useRef } from "react";
+import { v4 as uuidv4 } from "uuid";
+import { useReactToPrint } from "react-to-print";
 
-import Template from './components/Template';
-import Calculator from './components/Calculator';
-import RadioRow from './components/RadioRow'
-import Eye from './components/Eye';
-import Summary from './components/Summary';
-import Personalia from './components/Personalia';
-import PersonaliaInput from './components/PersonaliaInput';
-import CommentInput from './components/CommentInput';
+import Template from "./components/Template";
+import Calculator from "./components/Calculator";
+import RadioRow from "./components/RadioRow";
+import Eye from "./components/Eye";
+import Summary from "./components/Summary";
+import Personalia from "./components/Personalia";
+import PersonaliaInput from "./components/PersonaliaInput";
+import CommentInput from "./components/CommentInput";
 
+import lens from "./assets/lensPrices.jsx";
+import skuPrices from "./assets/SkuPrices";
 
-import  lens  from './assets/lensPrices.jsx'
-import skuPrices from './assets/SkuPrices';
-
-
-
-const LOCAL_STORAGE_KEY = "optoTools.tests"
+const LOCAL_STORAGE_KEY = "optoTools.tests";
 
 function App() {
   const [tests, setTests] = useState(() => {
-    const testJSON = localStorage.getItem(LOCAL_STORAGE_KEY)
+    const testJSON = localStorage.getItem(LOCAL_STORAGE_KEY);
     if (testJSON == null) {
-      return sampleTests
+      return sampleTests;
     } else {
-      return JSON.parse(testJSON)
+      return JSON.parse(testJSON);
     }
   });
-  
+
   const initialState = {
     specNum1: {
       frameName: "",
       framePrice: 0,
       lensType: "",
       lensPrice: 0,
-      id: 1
-  },
+      id: 1,
+    },
     specNum2: {
       frameName: "",
       framePrice: 0,
       lensType: "",
       lensPrice: 0,
-      id: 2
-  }, 
+      id: 2,
+    },
     total: 0,
-    cheapestId: 0
-  }
+    cheapestId: 0,
+  };
 
-  
-  const [route, setRoute] = useState("calculator")
-  const [offerSelect, setOfferSelect] = useState("ToForEnUV")
-  const [options] = useState(lens)
-  const [options2] = useState(skuPrices)
-  const [synstest, setSynstest] = useState(false)
-  const [specPrice, setSpecPrice] = useState(initialState)
-  const [personalia, setPersonalia] = useState({
+  const initialStatePersonalia = {
     name: "",
     birthDate: "",
     address: "",
-    comment: ""
-  })
-  
-  const inputRefArray = [useRef(), useRef()]
+    comment: "",
+  };
+
+  const [route, setRoute] = useState("calculator");
+  const [offerSelect, setOfferSelect] = useState("ToForEnUV");
+  const [options] = useState(lens);
+  const [options2] = useState(skuPrices);
+  const [synstest, setSynstest] = useState(false);
+  const [specPrice, setSpecPrice] = useState(initialState);
+  const [personalia, setPersonalia] = useState(initialStatePersonalia);
+
+  const inputRefArray = [useRef(), useRef()];
+  const inputRefArray2 = [useRef(), useRef()];
   const componentRef = useRef();
-  
-  useEffect(() => { 
-    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(tests))
-  }, [tests])
-  
-  
 
   useEffect(() => {
-    handleCalculateTotal()
-  }, [offerSelect, synstest]) 
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(tests));
+  }, [tests]);
+
+  useEffect(() => {
+    handleCalculateTotal();
+  }, [offerSelect, synstest]);
 
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
-    documentTitle: `Prisoverslag ${personalia.name}`
+    documentTitle: `Prisoverslag ${personalia.name}`,
   });
 
   const handlePersonaliaChange = (e) => {
-    let personaliaCopy = {...personalia}
+    let personaliaCopy = { ...personalia };
     let propToChange = e.target.id;
     personaliaCopy = { ...personaliaCopy, [propToChange]: e.target.value };
     /* let propToChange = Object.keys(personaliaCopy).filter(key => key === e.target.id)
     personaliaCopy[propToChange] = e.target.value */
-    setPersonalia(personaliaCopy)
-  }
+    setPersonalia(personaliaCopy);
+  };
 
   const calculateTwoForOne = () => {
-    let specPriceCopy = {...specPrice}
-    let lensTypeOne = specPriceCopy.specNum1.lensType
-    let lensTypeTwo = specPriceCopy.specNum2.lensType
-    let specNum1Total = (
-      specPriceCopy.specNum1.framePrice + 
-      specPriceCopy.specNum1.lensPrice
-    )
-    let specNum2Total = (
-      specPriceCopy.specNum2.framePrice + 
-      specPriceCopy.specNum2.lensPrice
-    )
+    let specPriceCopy = { ...specPrice };
+    let lensTypeOne = specPriceCopy.specNum1.lensType;
+    let lensTypeTwo = specPriceCopy.specNum2.lensType;
+    let specNum1Total =
+      specPriceCopy.specNum1.framePrice + specPriceCopy.specNum1.lensPrice;
+    let specNum2Total =
+      specPriceCopy.specNum2.framePrice + specPriceCopy.specNum2.lensPrice;
     if (lensTypeOne.includes("m/farge") && lensTypeTwo.includes("m/farge")) {
       if (specNum1Total > specNum2Total) {
-        specPriceCopy.cheapestId = specPriceCopy.specNum2.id
-        specPriceCopy.total = specNum1Total
+        specPriceCopy.cheapestId = specPriceCopy.specNum2.id;
+        specPriceCopy.total = specNum1Total;
       } else {
-        specPriceCopy.cheapestId = specPriceCopy.specNum1.id
-        specPriceCopy.total = specNum2Total
+        specPriceCopy.cheapestId = specPriceCopy.specNum1.id;
+        specPriceCopy.total = specNum2Total;
       }
     } else if (offerSelect === "ToForEnUV" && lensTypeOne.includes("m/farge")) {
-        specNum1Total = (specNum1Total - 400)
+      specNum1Total = specNum1Total - 400;
     } else if (offerSelect === "ToForEnUV" && lensTypeTwo.includes("m/farge")) {
-        specNum2Total = (specNum2Total - 400)    
-    } if (specNum1Total > specNum2Total) {
-      specPriceCopy.cheapestId = Number(specPriceCopy.specNum2.id)
-      specPriceCopy.total = specNum1Total
+      specNum2Total = specNum2Total - 400;
+    }
+    if (specNum1Total > specNum2Total) {
+      specPriceCopy.cheapestId = Number(specPriceCopy.specNum2.id);
+      specPriceCopy.total = specNum1Total;
     } else {
-      specPriceCopy.cheapestId = Number(specPriceCopy.specNum1.id)
-      specPriceCopy.total = specNum2Total
+      specPriceCopy.cheapestId = Number(specPriceCopy.specNum1.id);
+      specPriceCopy.total = specNum2Total;
     }
     if (synstest) {
-      specPriceCopy.total = (specPriceCopy.total + 685)
+      specPriceCopy.total = specPriceCopy.total + 685;
     }
-    setSpecPrice(specPriceCopy)
-  }
+    setSpecPrice(specPriceCopy);
+  };
 
   const calculateOtherOffers = () => {
-    let specPriceCopy = {...specPrice}
-    let specNum1Total = (
-      specPriceCopy.specNum1.framePrice + 
-      specPriceCopy.specNum1.lensPrice
-    )
+    let specPriceCopy = { ...specPrice };
+    let specNum1Total =
+      specPriceCopy.specNum1.framePrice + specPriceCopy.specNum1.lensPrice;
     if (offerSelect === "Komplett") {
       if (specPriceCopy.specNum1.lensPrice >= 800) {
-        specNum1Total = (specNum1Total - 800)
+        specNum1Total = specNum1Total - 800;
       }
-      specPriceCopy.total = specNum1Total
+      specPriceCopy.total = specNum1Total;
     } else if (offerSelect === "60+") {
-      specNum1Total = (specNum1Total * 0.75)
-      specPriceCopy.total = specNum1Total
+      specNum1Total = specNum1Total * 0.75;
+      specPriceCopy.total = specNum1Total;
     } else if (offerSelect === "GoldenTicket") {
-      specNum1Total = (specNum1Total * 0.50)
-      specPriceCopy.total = specNum1Total
+      specNum1Total = specNum1Total * 0.5;
+      specPriceCopy.total = specNum1Total;
     } else if (offerSelect === "NAV") {
-      specPriceCopy.total = specNum1Total
+      specPriceCopy.total = specNum1Total;
     }
-    if (synstest===true) {
-      specPriceCopy.total = (specPriceCopy.total + 685)
-  }
-    setSpecPrice(specPriceCopy)
-  }
+    if (synstest === true) {
+      specPriceCopy.total = specPriceCopy.total + 685;
+    }
+    setSpecPrice(specPriceCopy);
+  };
 
   const handleCalculateTotal = () => {
     if (offerSelect === "ToForEn" || offerSelect === "ToForEnUV") {
-      calculateTwoForOne()
+      calculateTwoForOne();
     } else {
-      calculateOtherOffers()
+      calculateOtherOffers();
     }
-  }
+  };
 
   const handleTestChange = (id) => {
-    const testObject = {...tests};
-    let selectedTest; 
+    const testObject = { ...tests };
+    let selectedTest;
     for (const key in testObject) {
-      testObject[key].filter(test => {
+      testObject[key].filter((test) => {
         if (test.id === id) {
-          selectedTest = test
+          selectedTest = test;
         }
-      })
+      });
     }
-    selectedTest.show = !selectedTest.show
-    setTests(testObject) 
-  }
+    selectedTest.show = !selectedTest.show;
+    setTests(testObject);
+  };
 
   const handleOfferChange = (value) => {
     if (value === "Synstest") {
-      setSynstest(!synstest)
+      setSynstest(!synstest);
     } else {
-      setOfferSelect(value)
+      setOfferSelect(value);
     }
-  } 
+  };
 
   const handleUserInputChange = (e, eyeId, testID) => {
     e.preventDefault();
-    const testObject = {...tests}
+    const testObject = { ...tests };
     let selectedTest;
     for (const key in testObject) {
-      testObject[key].filter(test => {
+      testObject[key].filter((test) => {
         if (test.id === testID) {
-          selectedTest = test
-        }  
-      })
+          selectedTest = test;
+        }
+      });
     }
     for (const key in selectedTest) {
-      
-      if(selectedTest[key].id === eyeId) {
-        selectedTest[key].value = e.target.value
-      }  
-    } 
-    setTests(testObject)
-  }
-
+      if (selectedTest[key].id === eyeId) {
+        selectedTest[key].value = e.target.value;
+      }
+    }
+    setTests(testObject);
+  };
 
   const copyContent = async (text) => {
-    if ('clipboard' in navigator) {
+    if ("clipboard" in navigator) {
       return await navigator.clipboard.writeText(text);
     } else {
-      return document.execCommand('copy', true, text);
+      return document.execCommand("copy", true, text);
     }
-  }
-
+  };
 
   const handleCopyTest = (e, btn, id) => {
     e.preventDefault();
     let componentToCopy;
     let inputText = "";
-    const testObject = {...tests}
+    const testObject = { ...tests };
 
     for (const key in testObject) {
-      testObject[key].filter(test => {
+      testObject[key].filter((test) => {
         if (test.id === id) {
-          componentToCopy = testObject[key]
-        }  
-      })
-    } 
+          componentToCopy = testObject[key];
+        }
+      });
+    }
     if (btn === "buttonOd") {
-      componentToCopy.map(test => {
+      componentToCopy.map((test) => {
         if (test.od.value !== "" && test.show) {
-          inputText += `${test.name}: ${test.od.value}\n`
+          inputText += `${test.name}: ${test.od.value}\n`;
         }
-      })
+      });
     } else if (btn === "buttonOs") {
-      componentToCopy.map(test => {
+      componentToCopy.map((test) => {
         if (test.os.value !== "" && test.show) {
-          inputText += `${test.name}: ${test.os.value}\n`
+          inputText += `${test.name}: ${test.os.value}\n`;
         }
-      })
+      });
     }
     copyContent(inputText.trim());
-  }
+  };
 
   const handleReset = (e, btn, id) => {
     e.preventDefault();
     let componentToReset;
-    const testObject = {...tests}
+    const testObject = { ...tests };
 
     for (const key in testObject) {
-      testObject[key].filter(test => {
+      testObject[key].filter((test) => {
         if (test.id === id) {
-          componentToReset = testObject[key]
-        }  
-      })
+          componentToReset = testObject[key];
+        }
+      });
     }
     if (btn === "resetOd") {
-      componentToReset.forEach(test => {
-        test.od.value = ""
-      })
+      componentToReset.forEach((test) => {
+        test.od.value = "";
+      });
     } else if (btn === "resetOs") {
-      componentToReset.forEach(test => {
-        test.os.value = ""
-      })
+      componentToReset.forEach((test) => {
+        test.os.value = "";
+      });
     }
     setTests(testObject);
-  }
+  };
 
- 
-
-  
   const handleLensPrice = (e, id, index) => {
-    let specPriceCopy = {...specPrice}
-    if ( id === 1) {
-      specPriceCopy.specNum1.lensPrice = Number(e[0].price)
-      specPriceCopy.specNum1.lensType = (e[0].type)
+    let specPriceCopy = { ...specPrice };
+    if (id === 1) {
+      specPriceCopy.specNum1.lensPrice = Number(e[0].price);
+      specPriceCopy.specNum1.lensType = e[0].type;
     } else {
-      specPriceCopy.specNum2.lensPrice = Number(e[0].price)
-      specPriceCopy.specNum2.lensType = (e[0].type)
+      specPriceCopy.specNum2.lensPrice = Number(e[0].price);
+      specPriceCopy.specNum2.lensType = e[0].type;
     }
-    
-    setSpecPrice(specPriceCopy);
-    inputRefArray[index].current.focus()
-    handleCalculateTotal()
-  }
 
+    setSpecPrice(specPriceCopy);
+    inputRefArray[index].current.focus();
+    handleCalculateTotal();
+  };
 
   const handleOnRemove = (e, id) => {
-    let specPriceCopy = {...specPrice}
-    if ( id === 1) {
-      specPriceCopy.specNum1.lensPrice = 0
-      specPriceCopy.specNum1.lensType = ""
+    let specPriceCopy = { ...specPrice };
+    if (id === 1) {
+      specPriceCopy.specNum1.lensPrice = 0;
+      specPriceCopy.specNum1.lensType = "";
     } else {
-      specPriceCopy.specNum2.lensPrice = 0
-      specPriceCopy.specNum2.lensType = ""
+      specPriceCopy.specNum2.lensPrice = 0;
+      specPriceCopy.specNum2.lensType = "";
     }
-    setSpecPrice(specPriceCopy)
-    handleCalculateTotal()
-  }
+    setSpecPrice(specPriceCopy);
+    handleCalculateTotal();
+  };
 
   const handleLensPriceChange = (e, id) => {
-    let specPriceCopy = {...specPrice}
-    let num = Number(e.target.value)
+    let specPriceCopy = { ...specPrice };
+    let num = Number(e.target.value);
     if (isNaN(num)) {
-      return
+      return;
     }
-    if ( id === 1) {
-      specPriceCopy.specNum1.lensPrice = num
+    if (id === 1) {
+      specPriceCopy.specNum1.lensPrice = num;
     } else {
-      specPriceCopy.specNum2.lensPrice = num
+      specPriceCopy.specNum2.lensPrice = num;
     }
-    setSpecPrice(specPriceCopy)
-    handleCalculateTotal()
-  }
+    setSpecPrice(specPriceCopy);
+    handleCalculateTotal();
+  };
 
   const handleFrameNameChange = (e, id) => {
-    let specPriceCopy = {...specPrice}
-    console.log(e)
-    if ( id === 1) {
-      specPriceCopy.specNum1.frameName = e.target.value
+    let specPriceCopy = { ...specPrice };
+    console.log(e);
+    if (id === 1) {
+      specPriceCopy.specNum1.frameName = e.target.value;
     } else {
-      specPriceCopy.specNum2.frameName = e.target.value
+      specPriceCopy.specNum2.frameName = e.target.value;
     }
-    setSpecPrice(specPriceCopy)
-  }
+    setSpecPrice(specPriceCopy);
+  };
 
   const handleFramePriceChange = (e, id) => {
-    let specPriceCopy = {...specPrice}
-    let num = Number(e.target.value)
+    let specPriceCopy = { ...specPrice };
+    let num = Number(e.target.value);
     if (isNaN(num)) {
-      return
+      return;
     }
-    if ( id === 1) {
-      specPriceCopy.specNum1.framePrice = num
-    } else {
-      specPriceCopy.specNum2.framePrice = num
-    }
-    setSpecPrice(specPriceCopy)
-    handleCalculateTotal()
-  }
-
-  const handleFrameNameOnSelect = (e, id) => {
-    let specPriceCopy = {...specPrice}
-    let name = e[0].type
-    let price = Number(e[0].price) 
     if (id === 1) {
-      specPriceCopy.specNum1.frameName = name
-      specPriceCopy.specNum1.framePrice = price
+      specPriceCopy.specNum1.framePrice = num;
     } else {
-      specPriceCopy.specNum2.frameName = name
-      specPriceCopy.specNum2.framePrice = price
+      specPriceCopy.specNum2.framePrice = num;
     }
-    setSpecPrice(specPriceCopy)
-    handleCalculateTotal()
-  }
+    setSpecPrice(specPriceCopy);
+    handleCalculateTotal();
+  };
+
+  const handleFrameNameOnSelect = (e, id, index) => {
+    let specPriceCopy = { ...specPrice };
+    let name = e[0].type;
+    let price = Number(e[0].price);
+    if (id === 1) {
+      specPriceCopy.specNum1.frameName = name;
+      specPriceCopy.specNum1.framePrice = price;
+    } else {
+      specPriceCopy.specNum2.frameName = name;
+      specPriceCopy.specNum2.framePrice = price;
+    }
+    setSpecPrice(specPriceCopy);
+    inputRefArray2[index].current.focus();
+    handleCalculateTotal();
+  };
 
   const handleFrameNameOnRemove = (e, id) => {
-    let specPriceCopy = {...specPrice}
+    let specPriceCopy = { ...specPrice };
     if (id === 1) {
-      specPriceCopy.specNum1.frameName = ""
-      specPriceCopy.specNum1.framePrice = 0
+      specPriceCopy.specNum1.frameName = "";
+      specPriceCopy.specNum1.framePrice = 0;
     } else {
-      specPriceCopy.specNum2.frameName = ""
-      specPriceCopy.specNum2.framePrice = 0
+      specPriceCopy.specNum2.frameName = "";
+      specPriceCopy.specNum2.framePrice = 0;
     }
-    setSpecPrice(specPriceCopy)
-    handleCalculateTotal()
-  }
+    setSpecPrice(specPriceCopy);
+    handleCalculateTotal();
+  };
+
+  const handleCalulatorReset = () => {
+    window.location.reload(false);
+  };
 
   const handleRouteChange = (e) => {
-    setRoute(e.target.id)
-  }
+    setRoute(e.target.id);
+  };
 
   return (
     <>
-    <div className="mt-4">
-    <div className="hidden sm:flex absolute top-12 left-6 bg-purple-400 rounded-md shadow-2xl">
-      <Eye className="cursor-pointer pr-2" />
-      <Eye className="cursor-pointer pl-2" />
-      <div className='text-lg px-1'>optoTools</div>
-    </div>
-    </div>
-    <div className='text-center sm:text-right mb-10'>
-      <button className='text-xl mr-4 hover:underline'
-        id="calculator"
-        onClick={(e)=> handleRouteChange(e)}>
-        Brillekalkulator
-      </button>
-      <button className='text-xl mx-4 hover:underline'
-        id="template"
-        onClick={(e)=> handleRouteChange(e)}>
-        Mal
-      </button>
-    </div>
-    {route === "template" &&
-      <div className='mb-28'>
-      <h1 className='text-center text-3xl mb-5 mt-28'>
-        Anterior
-      </h1>
-        <Template 
-          handleUserInputChange={handleUserInputChange}
-          handleTestChange={handleTestChange}
-          handleCopyTest={handleCopyTest}
-          handleReset={handleReset}
-          tests={[...tests.anterior]}  
-        />
-      <h1 className='text-center text-3xl mb-5 mt-28'>
-        Posterior
-      </h1>
-        <Template 
-          handleUserInputChange={handleUserInputChange}
-          handleTestChange={handleTestChange}
-          handleCopyTest={handleCopyTest}
-          handleReset={handleReset}
-          tests={[...tests.posterior]}  
-        />
-        <br/>
-        <br/>
-        <br/>
-        </div>}
-      {route === "calculator" &&
-      <>
-      <h4 className='text-center text-3xl mb-5 mt-32'>
-        Brillekalkulator
-      </h4>
-      <div className='flex justify-center w-full'>
-        <div className='w-[1000px]'>
-        <RadioRow
-          handleOfferChange={handleOfferChange}
-        />
-        <PersonaliaInput
-          personalia={personalia}
-          handlePersonaliaChange={handlePersonaliaChange}
-        />
-        <Calculator
-          index={0} 
-          handleFramePriceChange={handleFramePriceChange}
-          handleFrameNameChange={handleFrameNameChange}
-          handleFrameNameOnSelect={handleFrameNameOnSelect}
-          handleFrameNameOnRemove={handleFrameNameOnRemove}
-          handleLensPriceChange={handleLensPriceChange} 
-          handleOnRemove={handleOnRemove}
-          handleLensPrice={handleLensPrice}
-          options={options}
-          options2={options2}
-          specPrice={specPrice.specNum1}
-          inputRefArray={inputRefArray[0]}
-          />
-      {(offerSelect === "ToForEn" || offerSelect === "ToForEnUV")&&
-        <>    
-          <Calculator
-            index={1}  
-            handleFramePriceChange={handleFramePriceChange}
-            handleFrameNameChange={handleFrameNameChange}
-            handleLensPriceChange={handleLensPriceChange}
-            handleFrameNameOnSelect={handleFrameNameOnSelect}
-            handleFrameNameOnRemove={handleFrameNameOnRemove} 
-            handleOnRemove={handleOnRemove}
-            handleLensPrice={handleLensPrice}
-            options={options}
-            options2={options2}
-            specPrice={specPrice.specNum2}
-            inputRefArray={inputRefArray[1]}
-          />
-        </>}
-        <CommentInput 
-          comment={personalia.comment}
-          handlePersonaliaChange={handlePersonaliaChange}
-        />
-        <div className='text-center font-bold'>
-          Total: {specPrice.total}
+      <div className="mt-4">
+        <div className="hidden sm:flex absolute top-12 left-6 bg-purple-400 rounded-md shadow-2xl">
+          <Eye className="cursor-pointer pr-2" />
+          <Eye className="cursor-pointer pl-2" />
+          <div className="text-lg px-1">optoTools</div>
         </div>
-        </div>
-      
       </div>
-        
-        <div className="md:w-[794px] md:h-[1123px] bg-white mx-auto mt-16 rounded relative">
-        <div ref={componentRef} className="p-6 pt-40">
-          <Personalia
-            personalia={personalia}
-            />
-          <h5 className='text-center mt-14 font-bold underline'>Brille 1:</h5>
-          <div className="flex justify-center mb-10">
-            <Summary 
-              specPrice={specPrice.specNum1}
-              offerSelect={offerSelect}
-              cheapestId={specPrice.cheapestId}
-              synstest={synstest}
-              />
-          </div>
-          {(offerSelect === "ToForEn" || offerSelect === "ToForEnUV") ?
-          <>
-          <h6 className='text-center font-bold underline'>Brille 2:</h6>
-          <div className="flex justify-center mb-10">
-            <Summary 
-              specPrice={specPrice.specNum2}
-              offerSelect={offerSelect}
-              cheapestId={specPrice.cheapestId}
-            />
-          </div>
-          </>
-          : null  
-        }
-          <div className='text-center mt-5 mb-6 font-bold'>
-            Total: {specPrice.total > 0 ? specPrice.total: 0}kr
-          </div>
-          <p className='font-bold mt-16 text-center'>Kommentar: </p>
-          <div className='text-center mt-4 w-3/4 border border-black min-h-[80px] h-auto mx-auto break-words'>
-            <p className='text-left p-3'>{personalia.comment}</p>
-          </div>
-          <p className='absolute bottom-5 left-5 '> sign. ______________________</p>
+      <div className="text-center sm:text-right mb-10">
+        <button
+          className="text-xl mr-4 hover:underline"
+          id="calculator"
+          onClick={(e) => handleRouteChange(e)}
+        >
+          Brillekalkulator
+        </button>
+        <button
+          className="text-xl mx-4 hover:underline"
+          id="template"
+          onClick={(e) => handleRouteChange(e)}
+        >
+          Mal
+        </button>
+      </div>
+      {route === "template" && (
+        <div className="mb-28">
+          <h1 className="text-center text-3xl mb-5 mt-28">Anterior</h1>
+          <Template
+            handleUserInputChange={handleUserInputChange}
+            handleTestChange={handleTestChange}
+            handleCopyTest={handleCopyTest}
+            handleReset={handleReset}
+            tests={[...tests.anterior]}
+          />
+          <h1 className="text-center text-3xl mb-5 mt-28">Posterior</h1>
+          <Template
+            handleUserInputChange={handleUserInputChange}
+            handleTestChange={handleTestChange}
+            handleCopyTest={handleCopyTest}
+            handleReset={handleReset}
+            tests={[...tests.posterior]}
+          />
+          <br />
+          <br />
+          <br />
         </div>
-        </div>
-        <div className='flex justify-center mb-40'>
-          <button className='bg-green-800 text-slate-50 p-2 rounded mt-8 w-20'
-            onClick={handlePrint}>
+      )}
+      {route === "calculator" && (
+        <>
+          <h4 className="text-center text-3xl mb-5 mt-32">Brillekalkulator</h4>
+          <div className="flex justify-center w-full">
+            <div className="max-w-screen-sm sm:max-w-screen-md">
+              <RadioRow handleOfferChange={handleOfferChange} />
+              <div className="flex justify-center flex-col">
+                <PersonaliaInput
+                  personalia={personalia}
+                  handlePersonaliaChange={handlePersonaliaChange}
+                />
+                <Calculator
+                  index={0}
+                  handleFramePriceChange={handleFramePriceChange}
+                  handleFrameNameChange={handleFrameNameChange}
+                  handleFrameNameOnSelect={handleFrameNameOnSelect}
+                  handleFrameNameOnRemove={handleFrameNameOnRemove}
+                  handleLensPriceChange={handleLensPriceChange}
+                  handleOnRemove={handleOnRemove}
+                  handleLensPrice={handleLensPrice}
+                  options={options}
+                  options2={options2}
+                  specPrice={specPrice.specNum1}
+                  inputRefArray={inputRefArray[0]}
+                  inputRefArray2={inputRefArray2[0]}
+                />
+                {(offerSelect === "ToForEn" || offerSelect === "ToForEnUV") && (
+                  <>
+                    <Calculator
+                      index={1}
+                      handleFramePriceChange={handleFramePriceChange}
+                      handleFrameNameChange={handleFrameNameChange}
+                      handleLensPriceChange={handleLensPriceChange}
+                      handleFrameNameOnSelect={handleFrameNameOnSelect}
+                      handleFrameNameOnRemove={handleFrameNameOnRemove}
+                      handleOnRemove={handleOnRemove}
+                      handleLensPrice={handleLensPrice}
+                      options={options}
+                      options2={options2}
+                      specPrice={specPrice.specNum2}
+                      inputRefArray={inputRefArray[1]}
+                      inputRefArray2={inputRefArray2[1]}
+                    />
+                  </>
+                )}
+                <CommentInput
+                  comment={personalia.comment}
+                  handlePersonaliaChange={handlePersonaliaChange}
+                />
+              </div>
+
+              <div className="mx-auto flex justify-center flex-col">
+                <div className="text-center">
+                  <p className="font-bold">Total: {specPrice.total}</p>
+                </div>
+                <div className="text-center mt-4">
+                  <button
+                    className="bg-green-800 text-slate-50 p-2 rounded w-20"
+                    onClick={handleCalulatorReset}
+                  >
+                    Reset
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="md:w-[794px] md:h-[1123px] sm:bg-white mx-auto mt-16 rounded relative">
+            <div ref={componentRef} className="p-6 pt-40">
+              <Personalia personalia={personalia} />
+              <h5 className="text-center mt-14 font-bold underline">
+                Brille 1:
+              </h5>
+              <div className="flex justify-center mb-10">
+                <Summary
+                  specPrice={specPrice.specNum1}
+                  offerSelect={offerSelect}
+                  cheapestId={specPrice.cheapestId}
+                  synstest={synstest}
+                />
+              </div>
+              {offerSelect === "ToForEn" || offerSelect === "ToForEnUV" ? (
+                <>
+                  <h6 className="text-center font-bold underline">Brille 2:</h6>
+                  <div className="flex justify-center mb-10">
+                    <Summary
+                      specPrice={specPrice.specNum2}
+                      offerSelect={offerSelect}
+                      cheapestId={specPrice.cheapestId}
+                    />
+                  </div>
+                </>
+              ) : null}
+              <div className="text-center mt-5 mb-6 font-bold">
+                Total: {specPrice.total > 0 ? specPrice.total : 0}kr
+              </div>
+              <p className="font-bold mt-16 text-center">Kommentar: </p>
+              <div className="text-center mt-4 w-3/4 border border-black min-h-[80px] h-auto mx-auto break-words">
+                <p className="text-left p-3">{personalia.comment}</p>
+              </div>
+              <p className="absolute bottom-5 left-5 ">
+                {" "}
+                sign. ______________________
+              </p>
+            </div>
+          </div>
+          <div className="flex justify-center mb-40">
+            <button
+              className="bg-green-800 text-slate-50 p-2 rounded mt-8 w-20"
+              onClick={handlePrint}
+            >
               Skriv ut
-          </button>
-        </div>
-        </>} 
+            </button>
+          </div>
         </>
-  )
+      )}
+    </>
+  );
 }
 
-
-export default App
+export default App;
 
 const sampleTests = {
-  anterior: 
-  [
+  anterior: [
     {
       id: uuidv4(),
       name: "Konjunktival rødhet",
       show: true,
       od: {
         id: uuidv4(),
-        value: ""  
+        value: "",
       },
       os: {
         id: uuidv4(),
-        value: ""
+        value: "",
       },
-      img: "/assets/konjunktivalrodhet.png" 
+      img: "/assets/konjunktivalrodhet.png",
     },
     {
       id: uuidv4(),
@@ -547,13 +552,13 @@ const sampleTests = {
       show: true,
       od: {
         id: uuidv4(),
-        value: ""  
+        value: "",
       },
       os: {
         id: uuidv4(),
-        value: ""
+        value: "",
       },
-      img: "/assets/limbalrodhet.png"
+      img: "/assets/limbalrodhet.png",
     },
     {
       id: uuidv4(),
@@ -561,13 +566,13 @@ const sampleTests = {
       show: true,
       od: {
         id: uuidv4(),
-        value: ""  
+        value: "",
       },
       os: {
         id: uuidv4(),
-        value: ""
+        value: "",
       },
-      img: "/assets/palpebralrodhet.png"
+      img: "/assets/palpebralrodhet.png",
     },
     {
       id: uuidv4(),
@@ -575,13 +580,13 @@ const sampleTests = {
       show: true,
       od: {
         id: uuidv4(),
-        value: ""  
+        value: "",
       },
       os: {
         id: uuidv4(),
-        value: ""
+        value: "",
       },
-      img: "/assets/palpebralruhet.png"
+      img: "/assets/palpebralruhet.png",
     },
     {
       id: uuidv4(),
@@ -589,13 +594,13 @@ const sampleTests = {
       show: true,
       od: {
         id: uuidv4(),
-        value: ""  
+        value: "",
       },
       os: {
         id: uuidv4(),
-        value: ""
+        value: "",
       },
-      img: "/assets/meibomske.png"
+      img: "/assets/meibomske.png",
     },
     {
       id: uuidv4(),
@@ -603,13 +608,13 @@ const sampleTests = {
       show: true,
       od: {
         id: uuidv4(),
-        value: ""  
+        value: "",
       },
       os: {
         id: uuidv4(),
-        value: ""
+        value: "",
       },
-      img: "/assets/blefaritt.png"
+      img: "/assets/blefaritt.png",
     },
     {
       id: uuidv4(),
@@ -617,13 +622,13 @@ const sampleTests = {
       show: true,
       od: {
         id: uuidv4(),
-        value: ""  
+        value: "",
       },
       os: {
         id: uuidv4(),
-        value: ""
+        value: "",
       },
-      img: "/assets/neovaskularisering.png"
+      img: "/assets/neovaskularisering.png",
     },
     {
       id: uuidv4(),
@@ -631,12 +636,12 @@ const sampleTests = {
       show: true,
       od: {
         id: uuidv4(),
-        value: ""  
+        value: "",
       },
       os: {
         id: uuidv4(),
-        value: ""
-      }
+        value: "",
+      },
     },
     {
       id: uuidv4(),
@@ -644,28 +649,27 @@ const sampleTests = {
       show: true,
       od: {
         id: uuidv4(),
-        value: ""  
+        value: "",
       },
       os: {
         id: uuidv4(),
-        value: ""
-      }
-    }  
+        value: "",
+      },
+    },
   ],
-  posterior: 
-  [
+  posterior: [
     {
       id: uuidv4(),
       name: "C/D",
       show: true,
       od: {
         id: uuidv4(),
-        value: ""  
+        value: "",
       },
       os: {
         id: uuidv4(),
-        value: ""
-      }
+        value: "",
+      },
     },
     {
       id: uuidv4(),
@@ -673,12 +677,12 @@ const sampleTests = {
       show: true,
       od: {
         id: uuidv4(),
-        value: ""  
+        value: "",
       },
       os: {
         id: uuidv4(),
-        value: ""
-      }
+        value: "",
+      },
     },
     {
       id: uuidv4(),
@@ -686,12 +690,12 @@ const sampleTests = {
       show: true,
       od: {
         id: uuidv4(),
-        value: ""  
+        value: "",
       },
       os: {
         id: uuidv4(),
-        value: ""
-      }
+        value: "",
+      },
     },
     {
       id: uuidv4(),
@@ -699,12 +703,12 @@ const sampleTests = {
       show: true,
       od: {
         id: uuidv4(),
-        value: ""  
+        value: "",
       },
       os: {
         id: uuidv4(),
-        value: ""
-      }
+        value: "",
+      },
     },
     {
       id: uuidv4(),
@@ -712,12 +716,12 @@ const sampleTests = {
       show: true,
       od: {
         id: uuidv4(),
-        value: ""  
+        value: "",
       },
       os: {
         id: uuidv4(),
-        value: ""
-      }
+        value: "",
+      },
     },
     {
       id: uuidv4(),
@@ -725,12 +729,12 @@ const sampleTests = {
       show: true,
       od: {
         id: uuidv4(),
-        value: ""  
+        value: "",
       },
       os: {
         id: uuidv4(),
-        value: ""
-      }
+        value: "",
+      },
     },
     {
       id: uuidv4(),
@@ -738,12 +742,12 @@ const sampleTests = {
       show: true,
       od: {
         id: uuidv4(),
-        value: ""  
+        value: "",
       },
       os: {
         id: uuidv4(),
-        value: ""
-      }
-    }  
-  ]
-}
+        value: "",
+      },
+    },
+  ],
+};
