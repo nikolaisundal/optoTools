@@ -115,7 +115,7 @@ function App() {
       specPriceCopy.total = specNum2Total;
     }
     if (synstest) {
-      specPriceCopy.total = specPriceCopy.total + 685;
+      specPriceCopy.total = specPriceCopy.total + 695;
     }
     setSpecPrice(specPriceCopy);
   };
@@ -139,7 +139,7 @@ function App() {
       specPriceCopy.total = specNum1Total;
     }
     if (synstest === true) {
-      specPriceCopy.total = specPriceCopy.total + 685;
+      specPriceCopy.total = specPriceCopy.total + 695;
     }
     setSpecPrice(specPriceCopy);
   };

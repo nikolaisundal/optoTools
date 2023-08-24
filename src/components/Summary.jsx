@@ -22,7 +22,7 @@ export default function Summary(props) {
           <tr className="text-left">
             <td></td>
             <td className="border-2 border-black px-4 py-2">Synstest</td>
-            <td className="border-2 border-black px-4 py-2">685 kr</td>
+            <td className="border-2 border-black px-4 py-2">695 kr</td>
             <td className="border-2 border-black px-4 py-2"></td>
           </tr>
         ) : null}
