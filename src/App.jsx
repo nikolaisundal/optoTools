@@ -81,8 +81,6 @@ function App() {
     let personaliaCopy = { ...personalia };
     let propToChange = e.target.id;
     personaliaCopy = { ...personaliaCopy, [propToChange]: e.target.value };
-    /* let propToChange = Object.keys(personaliaCopy).filter(key => key === e.target.id)
-    personaliaCopy[propToChange] = e.target.value */
     setPersonalia(personaliaCopy);
   };
 
