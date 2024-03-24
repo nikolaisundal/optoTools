@@ -1,7 +1,7 @@
 import React from "react";
 
 export default function PersonaliaInput({
-  personalia: { address, name, birthDate, comment },
+  personalia: { address, name, birthDate, postCode, comment },
   handlePersonaliaChange,
 }) {
   return (
@@ -49,7 +49,7 @@ export default function PersonaliaInput({
             />
           </div>
         </div>
-        <div className="flex flex-col md:flex-row">
+        <div className="flex flex-col md:flex-row mb-2">
           <div className="w-32">
             <label
               className="text-gray-800 font-bold mb-1 whitespace-nowrap"
@@ -66,6 +66,27 @@ export default function PersonaliaInput({
               id="address"
               placeholder="Legg til adresse"
               value={address}
+              onChange={(e) => handlePersonaliaChange(e)}
+            />
+          </div>
+        </div>
+        <div className="flex flex-col md:flex-row">
+          <div className="w-32">
+            <label
+              className="text-gray-800 font-bold mb-1 whitespace-nowrap"
+              htmlFor="address"
+            >
+              Poststed:
+            </label>
+          </div>
+          <div className="w-72 md:w-96">
+            <input
+              className="appearance-none border-2 border-gray-200 rounded-lg w-full pb-1 px-1 text-gray-700 leading-tight h-11"
+              type="text"
+              name="postCode"
+              id="postCode"
+              placeholder="Legg til poststed"
+              value={postCode}
               onChange={(e) => handlePersonaliaChange(e)}
             />
           </div>

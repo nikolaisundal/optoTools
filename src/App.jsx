@@ -50,6 +50,7 @@ function App() {
     birthDate: "",
     address: "",
     comment: "",
+    postCode: "",
   };
 
   const [route, setRoute] = useState("calculator");
