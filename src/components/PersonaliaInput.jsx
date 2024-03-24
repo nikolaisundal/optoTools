@@ -70,11 +70,11 @@ export default function PersonaliaInput({
             />
           </div>
         </div>
-        <div className="flex flex-col md:flex-row">
+        <div className="flex flex-col md:flex-row mb-2">
           <div className="w-32">
             <label
               className="text-gray-800 font-bold mb-1 whitespace-nowrap"
-              htmlFor="address"
+              htmlFor="postCode"
             >
               Poststed:
             </label>

@@ -58,6 +58,7 @@ function App() {
   const [options] = useState(lens);
   const [options2] = useState(skuPrices);
   const [synstest, setSynstest] = useState(false);
+  const [navTwoSpecs, setnavTwoSpecs] = useState(false);
   const [specPrice, setSpecPrice] = useState(initialState);
   const [personalia, setPersonalia] = useState(initialStatePersonalia);
 
@@ -71,7 +72,7 @@ function App() {
 
   useEffect(() => {
     handleCalculateTotal();
-  }, [offerSelect, synstest]);
+  }, [offerSelect, synstest, navTwoSpecs]);
 
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
@@ -83,6 +84,23 @@ function App() {
     let propToChange = e.target.id;
     personaliaCopy = { ...personaliaCopy, [propToChange]: e.target.value };
     setPersonalia(personaliaCopy);
+  };
+
+  const handleOfferChange = (value) => {
+    if (value === "Synstest") {
+      setSynstest(!synstest);
+      handleCalculateTotal();
+      return;
+    }
+    if (value === "navTwoSpecs") {
+      setnavTwoSpecs(!navTwoSpecs);
+      handleCalculateTotal();
+      return;
+    }
+
+    setnavTwoSpecs(false);
+    setOfferSelect(value);
+    handleCalculateTotal();
   };
 
   const calculateTwoForOne = () => {
@@ -119,10 +137,20 @@ function App() {
     setSpecPrice(specPriceCopy);
   };
 
+  const handleCalculateTotal = () => {
+    if (offerSelect === "ToForEn" || offerSelect === "ToForEnUV") {
+      calculateTwoForOne();
+    } else {
+      calculateOtherOffers();
+    }
+  };
+
   const calculateOtherOffers = () => {
     let specPriceCopy = { ...specPrice };
     let specNum1Total =
       specPriceCopy.specNum1.framePrice + specPriceCopy.specNum1.lensPrice;
+    let specNum2Total =
+      specPriceCopy.specNum2.framePrice + specPriceCopy.specNum2.lensPrice;
     if (offerSelect === "Komplett") {
       if (specPriceCopy.specNum1.lensPrice >= 600) {
         specNum1Total = specNum1Total - 600;
@@ -135,20 +163,16 @@ function App() {
       specNum1Total = specNum1Total * 0.5;
       specPriceCopy.total = specNum1Total;
     } else if (offerSelect === "NAV") {
-      specPriceCopy.total = specNum1Total;
+      if (navTwoSpecs === false) {
+        specPriceCopy.total = specNum1Total;
+      } else {
+        specPriceCopy.total = specNum1Total + specNum2Total;
+      }
     }
     if (synstest === true) {
       specPriceCopy.total = specPriceCopy.total + 695;
     }
     setSpecPrice(specPriceCopy);
-  };
-
-  const handleCalculateTotal = () => {
-    if (offerSelect === "ToForEn" || offerSelect === "ToForEnUV") {
-      calculateTwoForOne();
-    } else {
-      calculateOtherOffers();
-    }
   };
 
   const handleTestChange = (id) => {
@@ -163,14 +187,6 @@ function App() {
     }
     selectedTest.show = !selectedTest.show;
     setTests(testObject);
-  };
-
-  const handleOfferChange = (value) => {
-    if (value === "Synstest") {
-      setSynstest(!synstest);
-    } else {
-      setOfferSelect(value);
-    }
   };
 
   const handleUserInputChange = (e, eyeId, testID) => {
@@ -298,7 +314,6 @@ function App() {
 
   const handleFrameNameChange = (e, id) => {
     let specPriceCopy = { ...specPrice };
-    console.log(e);
     if (id === 1) {
       specPriceCopy.specNum1.frameName = e.target.value;
     } else {
@@ -412,7 +427,10 @@ function App() {
           <h4 className="text-center text-3xl mb-5 mt-32">Brillekalkulator</h4>
           <div className="flex justify-center w-full">
             <div className="max-w-screen-sm sm:max-w-screen-md">
-              <RadioRow handleOfferChange={handleOfferChange} />
+              <RadioRow
+                handleOfferChange={handleOfferChange}
+                offerSelect={offerSelect}
+              />
               <div className="flex justify-center flex-col">
                 <PersonaliaInput
                   personalia={personalia}
@@ -433,7 +451,9 @@ function App() {
                   inputRefArray={inputRefArray[0]}
                   inputRefArray2={inputRefArray2[0]}
                 />
-                {(offerSelect === "ToForEn" || offerSelect === "ToForEnUV") && (
+                {(offerSelect === "ToForEn" ||
+                  offerSelect === "ToForEnUV" ||
+                  navTwoSpecs === true) && (
                   <>
                     <Calculator
                       index={1}
@@ -488,7 +508,9 @@ function App() {
                   synstest={synstest}
                 />
               </div>
-              {offerSelect === "ToForEn" || offerSelect === "ToForEnUV" ? (
+              {offerSelect === "ToForEn" ||
+              offerSelect === "ToForEnUV" ||
+              navTwoSpecs === true ? (
                 <>
                   <h6 className="text-center font-bold underline">Brille 2:</h6>
                   <div className="flex justify-center mb-10">
