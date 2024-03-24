@@ -522,10 +522,10 @@ function App() {
                   </div>
                 </>
               ) : null}
-              <div className="text-center mt-5 mb-6 font-bold">
+              <div className="text-center mb-6 font-bold">
                 Total: {specPrice.total > 0 ? specPrice.total : 0}kr
               </div>
-              <p className="font-bold mt-16 text-center">Kommentar: </p>
+              <p className="font-bold mt-10 text-center">Kommentar: </p>
               <div className="text-center mt-4 w-3/4 border border-black min-h-[80px] h-auto mx-auto break-words">
                 <p className="text-left p-3">{personalia.comment}</p>
               </div>
