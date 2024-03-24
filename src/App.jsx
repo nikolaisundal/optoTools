@@ -123,8 +123,8 @@ function App() {
     let specNum1Total =
       specPriceCopy.specNum1.framePrice + specPriceCopy.specNum1.lensPrice;
     if (offerSelect === "Komplett") {
-      if (specPriceCopy.specNum1.lensPrice >= 800) {
-        specNum1Total = specNum1Total - 800;
+      if (specPriceCopy.specNum1.lensPrice >= 600) {
+        specNum1Total = specNum1Total - 600;
       }
       specPriceCopy.total = specNum1Total;
     } else if (offerSelect === "60+") {
