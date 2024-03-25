@@ -480,7 +480,7 @@ function App() {
 
               <div className="mx-auto flex justify-center flex-col">
                 <div className="text-center">
-                  <p className="font-bold">Total: {specPrice.total}</p>
+                  <p className="font-bold">Totalt: {specPrice.total}</p>
                 </div>
                 <div className="text-center mt-4">
                   <button
@@ -523,7 +523,7 @@ function App() {
                 </>
               ) : null}
               <div className="text-center mb-6 font-bold">
-                Total: {specPrice.total > 0 ? specPrice.total : 0}kr
+                Totalt: {specPrice.total > 0 ? specPrice.total : 0}kr
               </div>
               <p className="font-bold mt-10 text-center">Kommentar: </p>
               <div className="text-center mt-4 w-3/4 border border-black min-h-[80px] h-auto mx-auto break-words">
