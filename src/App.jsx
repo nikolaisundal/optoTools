@@ -12,7 +12,7 @@ import PersonaliaInput from "./components/PersonaliaInput";
 import CommentInput from "./components/CommentInput";
 
 import lens from "./assets/lensPrices.jsx";
-import skuPrices from "./assets/SkuPrices";
+import skuPrices from "./assets/skuPrices.jsx";
 
 const LOCAL_STORAGE_KEY = "optoTools.tests";
 

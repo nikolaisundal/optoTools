@@ -10,7 +10,7 @@ const lens = [
   {
     type: "1,5 SV UCL",
     id: uuidv4(),
-    price: 800,
+    price: 600,
     cat: "SV",
   },
   {
@@ -34,7 +34,7 @@ const lens = [
   {
     type: "1,5 SV Asph UCL",
     id: uuidv4(),
-    price: 1400,
+    price: 1200,
     cat: "SV",
   },
   {
@@ -46,7 +46,7 @@ const lens = [
   {
     type: "1,6 SV UCL",
     id: uuidv4(),
-    price: 1400,
+    price: 1200,
     cat: "SV",
   },
   {
@@ -64,25 +64,25 @@ const lens = [
   {
     type: "1,67 SV UCSC",
     id: uuidv4(),
-    price: 2200,
+    price: 2500,
     cat: "SV",
   },
   {
     type: "1,67 SV Lifestyle",
     id: uuidv4(),
-    price: 2900,
+    price: 3200,
     cat: "SV",
   },
   {
     type: "1,74 SV UCSC",
     id: uuidv4(),
-    price: 2900,
+    price: 3000,
     cat: "SV",
   },
   {
     type: "1,74 SV Lifestyle",
     id: uuidv4(),
-    price: 3600,
+    price: 3700,
     cat: "SV",
   },
 
@@ -174,147 +174,147 @@ const lens = [
   {
     type: "1,5 SV Reactions UT",
     id: uuidv4(),
-    price: 800,
+    price: 1100,
     cat: "SV Reactions",
   },
   {
     type: "1,5 SV Reactions UCL",
     id: uuidv4(),
-    price: 1600,
+    price: 1700,
     cat: "SV Reactions",
   },
   {
     type: "1,5 SV Reactions UCSC",
     id: uuidv4(),
-    price: 1800,
+    price: 2100,
     cat: "SV Reactions",
   },
   {
     type: "1,5 SV Reactions Lifestyle",
     id: uuidv4(),
-    price: 2500,
+    price: 2800,
     cat: "SV Reactions",
   },
   {
     type: "1,6 SV Reactions UCL",
     id: uuidv4(),
-    price: 2200,
+    price: 2300,
     cat: "SV Reactions",
   },
   {
     type: "1,6 SV Reactions UCSC",
     id: uuidv4(),
-    price: 2400,
+    price: 2700,
     cat: "SV Reactions",
   },
   {
     type: "1,6 SV Reactions Lifestyle",
     id: uuidv4(),
-    price: 3100,
+    price: 3400,
     cat: "SV Reactions",
   },
   {
     type: "1,67 SV Reactions UCL",
     id: uuidv4(),
-    price: 3000,
+    price: 3600,
     cat: "SV Reactions",
   },
   {
     type: "1,67 SV Reactions Lifestyle",
     id: uuidv4(),
-    price: 3700,
+    price: 4300,
     cat: "SV Reactions",
   },
 
   {
     type: "1,5 SV Polariserte UT",
     id: uuidv4(),
-    price: 1000,
+    price: 1100,
     cat: "SV Polariserte",
   },
   {
     type: "1,5 SV Polariserte UCL",
     id: uuidv4(),
-    price: 1800,
+    price: 1700,
     cat: "SV Polariserte",
   },
   {
     type: "1,5 SV Polariserte UCSC",
     id: uuidv4(),
-    price: 2000,
+    price: 2100,
     cat: "SV Polariserte",
   },
   {
     type: "1,5 SV Polariserte Lifestyle",
     id: uuidv4(),
-    price: 2700,
+    price: 2800,
     cat: "SV Polariserte",
   },
   {
     type: "1,6 SV Polariserte UCL",
     id: uuidv4(),
-    price: 2400,
+    price: 2300,
     cat: "SV Polariserte",
   },
   {
     type: "1,6 SV Polariserte UCSC",
     id: uuidv4(),
-    price: 2600,
+    price: 2700,
     cat: "SV Polariserte",
   },
   {
     type: "1,6 SV Polariserte Lifestyle",
     id: uuidv4(),
-    price: 3300,
+    price: 3400,
     cat: "SV Polariserte",
   },
   {
     type: "1,67 SV Polariserte UCL",
     id: uuidv4(),
-    price: 3200,
+    price: 3600,
     cat: "SV Polariserte",
   },
   {
     type: "1,67 SV Polariserte Lifestyle",
     id: uuidv4(),
-    price: 3900,
+    price: 4300,
     cat: "SV Polariserte",
   },
 
   {
     type: "1,5 Standard UT",
     id: uuidv4(),
-    price: 800,
+    price: 600,
     cat: "Standard",
   },
   {
     type: "1,5 Standard UCSC",
     id: uuidv4(),
-    price: 1800,
+    price: 1600,
     cat: "Standard",
   },
   {
     type: "1,6 Standard UCL",
     id: uuidv4(),
-    price: 2200,
+    price: 1800,
     cat: "Standard",
   },
   {
     type: "1,6 Standard UCSC",
     id: uuidv4(),
-    price: 2400,
+    price: 2200,
     cat: "Standard",
   },
   {
     type: "1,67 Standard UCSC",
     id: uuidv4(),
-    price: 3000,
+    price: 3100,
     cat: "Standard",
   },
   {
     type: "1,74 Standard UCSC",
     id: uuidv4(),
-    price: 3700,
+    price: 3600,
     cat: "Standard",
   },
 
@@ -352,7 +352,7 @@ const lens = [
   {
     type: "1,5 Standard UT Reactions",
     id: uuidv4(),
-    price: 1600,
+    price: 1700,
     cat: "Standard Reactions",
   },
   {
@@ -364,50 +364,50 @@ const lens = [
   {
     type: "1,6 Standard UCL Reactions",
     id: uuidv4(),
-    price: 3000,
+    price: 2900,
     cat: "Standard Reactions",
   },
   {
     type: "1,6 Standard UCSC Reactions",
     id: uuidv4(),
-    price: 3200,
+    price: 3300,
     cat: "Standard Reactions",
   },
   {
     type: "1,67 Standard UCSC Reactions",
     id: uuidv4(),
-    price: 3800,
+    price: 4200,
     cat: "Standard Reactions",
   },
 
   {
     type: "1,5 Standard UT Polarisert",
     id: uuidv4(),
-    price: 1800,
+    price: 1700,
     cat: "Standard Polarisert",
   },
   {
     type: "1,5 Standard UCSC Polarisert",
     id: uuidv4(),
-    price: 2800,
+    price: 2700,
     cat: "Standard Polarisert",
   },
   {
     type: "1,6 Standard UCL Polarisert",
     id: uuidv4(),
-    price: 3200,
+    price: 2900,
     cat: "Standard Polarisert",
   },
   {
     type: "1,6 Standard UCSC Polarisert",
     id: uuidv4(),
-    price: 3400,
+    price: 3300,
     cat: "Standard Polarisert",
   },
   {
     type: "1,67 Standard UCSC Polarisert",
     id: uuidv4(),
-    price: 4000,
+    price: 4200,
     cat: "Standard Polarisert",
   },
 
@@ -426,7 +426,7 @@ const lens = [
   {
     type: "1,6 Premium UCL",
     id: uuidv4(),
-    price: 4100,
+    price: 3900,
     cat: "Premium",
   },
   {
@@ -438,13 +438,13 @@ const lens = [
   {
     type: "1,67 Premium UCSC",
     id: uuidv4(),
-    price: 4900,
+    price: 5200,
     cat: "Premium",
   },
   {
     type: "1,74 Premium UCSC",
     id: uuidv4(),
-    price: 5600,
+    price: 5700,
     cat: "Premium",
   },
 
@@ -488,62 +488,62 @@ const lens = [
   {
     type: "1,5 Premium UT Reactions",
     id: uuidv4(),
-    price: 3500,
+    price: 3800,
     cat: "Premium Reactions",
   },
   {
     type: "1,5 Premium UCSC Reactions",
     id: uuidv4(),
-    price: 4500,
+    price: 4800,
     cat: "Premium Reactions",
   },
   {
     type: "1,6 Premium UCL Reactions",
     id: uuidv4(),
-    price: 4900,
+    price: 5000,
     cat: "Premium Reactions",
   },
   {
     type: "1,6 Premium UCSC Reactions",
     id: uuidv4(),
-    price: 5100,
+    price: 5400,
     cat: "Premium Reactions",
   },
   {
     type: "1,67 Premium UCSC Reactions",
     id: uuidv4(),
-    price: 5700,
+    price: 6300,
     cat: "Premium Reactions",
   },
 
   {
     type: "1,5 Premium UT Polarisert",
     id: uuidv4(),
-    price: 3700,
+    price: 3800,
     cat: "Premium Polarisert",
   },
   {
     type: "1,5 Premium UCSC Polarisert",
     id: uuidv4(),
-    price: 4700,
+    price: 4800,
     cat: "Premium Polarisert",
   },
   {
     type: "1,6 Premium UCL Polarisert",
     id: uuidv4(),
-    price: 5100,
+    price: 5000,
     cat: "Premium Polarisert",
   },
   {
     type: "1,6 Premium UCSC Polarisert",
     id: uuidv4(),
-    price: 5300,
+    price: 5400,
     cat: "Premium Polarisert",
   },
   {
     type: "1,67 Premium UCSC Polarisert",
     id: uuidv4(),
-    price: 5900,
+    price: 6300,
     cat: "Premium Polarisert",
   },
 
@@ -562,7 +562,7 @@ const lens = [
   {
     type: "1,6 Elite UCL",
     id: uuidv4(),
-    price: 5100,
+    price: 4900,
     cat: "Elite",
   },
   {
@@ -574,13 +574,13 @@ const lens = [
   {
     type: "1,67 Elite UCSC",
     id: uuidv4(),
-    price: 5900,
+    price: 6200,
     cat: "Elite",
   },
   {
     type: "1,74 Elite UCSC",
     id: uuidv4(),
-    price: 6600,
+    price: 6700,
     cat: "Elite",
   },
 
@@ -624,62 +624,62 @@ const lens = [
   {
     type: "1,5 Elite UT Reactions",
     id: uuidv4(),
-    price: 4500,
+    price: 4800,
     cat: "Elite Reactions",
   },
   {
     type: "1,5 Elite UCSC Reactions",
     id: uuidv4(),
-    price: 5500,
+    price: 5800,
     cat: "Elite Reactions",
   },
   {
     type: "1,6 Elite UCL Reactions",
     id: uuidv4(),
-    price: 5900,
+    price: 6000,
     cat: "Elite Reactions",
   },
   {
     type: "1,6 Elite UCSC Reactions",
     id: uuidv4(),
-    price: 6100,
+    price: 6400,
     cat: "Elite Reactions",
   },
   {
     type: "1,67 Elite UCSC Reactions",
     id: uuidv4(),
-    price: 6700,
+    price: 7300,
     cat: "Elite Reactions",
   },
 
   {
     type: "1,5 Elite UT Polarisert",
     id: uuidv4(),
-    price: 4700,
+    price: 4800,
     cat: "Elite Polarisert",
   },
   {
     type: "1,5 Elite UCSC Polarisert",
     id: uuidv4(),
-    price: 5700,
+    price: 5800,
     cat: "Elite Polarisert",
   },
   {
     type: "1,6 Elite UCL Polarisert",
     id: uuidv4(),
-    price: 6100,
+    price: 6000,
     cat: "Elite Polarisert",
   },
   {
     type: "1,6 Elite UCSC Polarisert",
     id: uuidv4(),
-    price: 6300,
+    price: 6400,
     cat: "Elite Polarisert",
   },
   {
     type: "1,67 Elite UCSC Polarisert",
     id: uuidv4(),
-    price: 6900,
+    price: 7300,
     cat: "Elite Polarisert",
   },
 
@@ -698,7 +698,7 @@ const lens = [
   {
     type: "1,6 Ultimate UCL",
     id: uuidv4(),
-    price: 5600,
+    price: 5400,
     cat: "Ultimate",
   },
   {
@@ -710,13 +710,13 @@ const lens = [
   {
     type: "1,67 Ultimate UCSC",
     id: uuidv4(),
-    price: 6400,
+    price: 6700,
     cat: "Ultimate",
   },
   {
     type: "1,74 Ultimate UCSC",
     id: uuidv4(),
-    price: 7100,
+    price: 7200,
     cat: "Ultimate",
   },
 
@@ -760,62 +760,62 @@ const lens = [
   {
     type: "1,5 Ultimate UT Reactions",
     id: uuidv4(),
-    price: 5000,
+    price: 5300,
     cat: "Ultimate Reactions",
   },
   {
     type: "1,5 Ultimate UCSC Reactions",
     id: uuidv4(),
-    price: 6000,
+    price: 6300,
     cat: "Ultimate Reactions",
   },
   {
     type: "1,6 Ultimate UCL Reactions",
     id: uuidv4(),
-    price: 6400,
+    price: 6500,
     cat: "Ultimate Reactions",
   },
   {
     type: "1,6 Ultimate UCSC Reactions",
     id: uuidv4(),
-    price: 6600,
+    price: 6900,
     cat: "Ultimate Reactions",
   },
   {
     type: "1,67 Ultimate UCSC Reactions",
     id: uuidv4(),
-    price: 7200,
+    price: 7800,
     cat: "Ultimate Reactions",
   },
 
   {
     type: "1,5 Ultimate UT Polariserte",
     id: uuidv4(),
-    price: 5200,
+    price: 5300,
     cat: "Ultimate Polariserte",
   },
   {
     type: "1,5 Ultimate UCSC Polariserte",
     id: uuidv4(),
-    price: 6200,
+    price: 6300,
     cat: "Ultimate Polariserte",
   },
   {
     type: "1,6 Ultimate UCL Polariserte",
     id: uuidv4(),
-    price: 6600,
+    price: 6500,
     cat: "Ultimate Polariserte",
   },
   {
     type: "1,6 Ultimate UCSC Polariserte",
     id: uuidv4(),
-    price: 6800,
+    price: 6900,
     cat: "Ultimate Polariserte",
   },
   {
     type: "1,67 Ultimate UCSC Polariserte",
     id: uuidv4(),
-    price: 7400,
+    price: 7800,
     cat: "Ultimate Polariserte",
   },
 
@@ -828,7 +828,7 @@ const lens = [
   {
     type: "1,6 Lifestyle UCL",
     id: uuidv4(),
-    price: 6300,
+    price: 6100,
     cat: "Lifestyle",
   },
   {
@@ -840,13 +840,13 @@ const lens = [
   {
     type: "1,67 Lifestyle UCSC",
     id: uuidv4(),
-    price: 7100,
+    price: 7400,
     cat: "Lifestyle",
   },
   {
     type: "1,74 Lifestyle UCSC",
     id: uuidv4(),
-    price: 7800,
+    price: 7900,
     cat: "Lifestyle",
   },
 
@@ -884,50 +884,50 @@ const lens = [
   {
     type: "1,5 Lifestyle UCSC Reactions",
     id: uuidv4(),
-    price: 6700,
+    price: 7000,
     cat: "Lifestyle Reactions",
   },
   {
     type: "1,6 Lifestyle UCL Reactions",
     id: uuidv4(),
-    price: 7100,
+    price: 7200,
     cat: "Lifestyle Reactions",
   },
   {
     type: "1,6 Lifestyle UCSC Reactions",
     id: uuidv4(),
-    price: 7300,
+    price: 7600,
     cat: "Lifestyle Reactions",
   },
   {
     type: "1,67 Lifestyle UCSC Reactions",
     id: uuidv4(),
-    price: 7900,
+    price: 8500,
     cat: "Lifestyle Reactions",
   },
 
   {
     type: "1,5 Lifestyle UCSC Polariserte",
     id: uuidv4(),
-    price: 6900,
+    price: 7000,
     cat: "Lifestyle Polariserte",
   },
   {
     type: "1,6 Lifestyle UCL Polariserte",
     id: uuidv4(),
-    price: 7300,
+    price: 7200,
     cat: "Lifestyle Polariserte",
   },
   {
     type: "1,6 Lifestyle UCSC Polariserte",
     id: uuidv4(),
-    price: 7500,
+    price: 7600,
     cat: "Lifestyle Polariserte",
   },
   {
     type: "1,67 Lifestyle UCSC Polariserte",
     id: uuidv4(),
-    price: 8100,
+    price: 8500,
     cat: "Lifestyle Polariserte",
   },
 ];
