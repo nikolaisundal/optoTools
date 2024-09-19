@@ -22,8 +22,8 @@ export default function Calculator(props) {
   const [overflowClipLens, setOverflowClipLens] = useState(false);
 
   return (
-    <form className="w-[350px] md:w-[650px] mx-auto">
-      <div className="flex flex-col md:flex-row mb-2 w-[290px] md:w-[650px] mx-auto">
+    <form className="w-[350px] md:w-[650px] mx-auto mb-2">
+      <div className="flex flex-col md:flex-row mb-4 w-[290px] md:w-[650px] mx-auto">
         <div className="w-32 pb-2 md:pb-0">
           <label
             className="text-gray-800 font-bold whitespace-nowrap mr-2"
@@ -34,7 +34,7 @@ export default function Calculator(props) {
         </div>
         <div className="w-72 md:w-96 mr-4 pb-2 md:pb-0">
           <Multiselect
-            className={`bg-slate-50 appearance-none border-2 border-gray-200 rounded-lg text-gray-700 leading-tight h-11 ${
+            className={`bg-slate-50 appearance-none focus:outline-none focus-within::bg-gray-100 border-black border-2 shadow-[4px_4px_0px_rgba(0,0,0,1)] rounded-lg text-gray-700 leading-tight h-11 ${
               overflowClipFrame ? " overflow-clip" : ""
             }`}
             options={options2}
@@ -63,15 +63,22 @@ export default function Calculator(props) {
               searchBox: {
                 border: "none",
               },
+              optionContainer: {
+                border: "2px solid black",
+                boxShadow: "4px 4px 0px rgba(0, 0, 0, 1)",
+                borderRadius: "0.3rem",
+                boxSizing: "border-box",
+              },
               chips: {
-                background: "rgb(22 101 52)",
+                background: "rgb(34, 197, 94)",
+                color: "black",
               },
             }}
           />
         </div>
         <div className="w-72 md:w-32 pb-2 md:pb-0">
           <input
-            className="appearance-none border-2 border-gray-200 rounded-lg w-full py-2 px-1 text-gray-700 leading-tight h-11"
+            className="appearance-none focus:outline-none border-black border-2 shadow-[4px_4px_0px_rgba(0,0,0,1)] rounded-lg w-full py-2 px-1 text-gray-700 leading-tight h-11"
             type="text"
             name="price"
             id="price"
@@ -81,7 +88,7 @@ export default function Calculator(props) {
           />
         </div>
       </div>
-      <div className="flex flex-col md:flex-row mb-2 w-[290px] md:w-[650px] mx-auto">
+      <div className="flex flex-col md:flex-row mb-4 w-[290px] md:w-[650px] mx-auto">
         <div className="w-32 pb-2 md:pb-0">
           <label
             className="text-gray-800 font-bold mb-1 whitespace-nowrap mr-2"
@@ -92,7 +99,7 @@ export default function Calculator(props) {
         </div>
         <div className="w-72 md:w-96 mr-4 pb-2 md:pb-0">
           <Multiselect
-            className={`bg-slate-50 appearance-none border-2 border-gray-200 rounded-lg text-gray-700 leading-tight h-11${
+            className={`bg-slate-50 appearance-none focus:outline-none border-black border-2 shadow-[4px_4px_0px_rgba(0,0,0,1)] rounded-lg text-gray-700 leading-tight h-11${
               overflowClipLens ? " overflow-clip" : ""
             }`}
             options={options}
@@ -122,15 +129,23 @@ export default function Calculator(props) {
               searchBox: {
                 border: "none",
               },
+              optionContainer: {
+                border: "2px solid black",
+                boxShadow: "4px 4px 0px rgba(0, 0, 0, 1)",
+                borderRadius: "0.3rem",
+                boxSizing: "border-box",
+              },
               chips: {
-                background: "rgb(22 101 52)",
+                background: "rgb(34, 197, 94)",
+                color: "black",
               },
             }}
           />
         </div>
+
         <div className="w-72 md:w-32 pb-2 md:pb-0">
           <input
-            className="appearance-none border-2 border-gray-200 rounded-lg w-full py-2 px-1 text-gray-700 leading-tight h-11"
+            className="appearance-none focus:outline-none border-black border-2 shadow-[4px_4px_0px_rgba(0,0,0,1)] rounded-lg w-full py-2 px-1 text-gray-700 leading-tight h-11"
             type="text"
             name="price"
             id="price"

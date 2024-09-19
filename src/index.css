@@ -13,8 +13,17 @@
   padding: 0;
 }
 
+@font-face {
+  font-family: "Geist";
+  src: url("/assets/fonts/GeistVF.woff2") format("woff2-variations"),
+    url("/assets/fonts/GeistVF.woff") format("woff-variations");
+  font-weight: 100 900;
+}
+
 body {
   background: rgb(134 239 172);
+  font-family: "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
 }
 
 .animate-bounce {
@@ -33,4 +42,8 @@ body {
 
 .searchBox {
   width: fit-content;
+}
+
+.closeIcon {
+  filter: brightness(0%);
 }

@@ -377,10 +377,10 @@ function App() {
   return (
     <>
       <div className="mt-4">
-        <div className="hidden sm:flex absolute top-12 left-6 bg-purple-400 rounded-md shadow-2xl">
-          <Eye className="cursor-pointer pr-2" />
+        <div className="hidden sm:flex absolute top-12 left-6 bg-purple-400 rounded-lg border-black border-2 shadow-[4px_4px_0px_rgba(0,0,0,1)]">
+          <Eye className="cursor-pointer pr-2 rounded-l-lg" />
           <Eye className="cursor-pointer pl-2" />
-          <div className="text-lg px-1">optoTools</div>
+          <div className="text-lg px-1 rounded-r-lg">optoTools</div>
         </div>
       </div>
       <div className="text-center sm:text-right mb-10">
@@ -431,6 +431,9 @@ function App() {
                 handleOfferChange={handleOfferChange}
                 offerSelect={offerSelect}
               />
+              <div className="relative h-px mt-8 mb-12">
+                <div className="absolute inset-0 bg-black h-1 rounded "></div>
+              </div>
               <div className="flex justify-center flex-col">
                 <PersonaliaInput
                   personalia={personalia}
@@ -478,13 +481,19 @@ function App() {
                 />
               </div>
 
-              <div className="mx-auto flex justify-center flex-col">
+              <div className="mx-auto flex justify-center flex-col mt-4">
                 <div className="text-center">
                   <p className="font-bold">Totalt: {specPrice.total}</p>
                 </div>
-                <div className="text-center mt-4">
+                <div className="text-center space-x-24 mt-4">
                   <button
-                    className="bg-green-800 text-slate-50 p-2 rounded w-20"
+                    className="border-black border-2 shadow-[4px_4px_0px_rgba(0,0,0,1)] bg-green-500 hover:scale-110 p-2 rounded mt-8 w-20"
+                    onClick={handlePrint}
+                  >
+                    Skriv ut
+                  </button>
+                  <button
+                    className="border-black border-2 shadow-[4px_4px_0px_rgba(0,0,0,1)] bg-pink-300 hover:scale-110 p-2 rounded w-20"
                     onClick={handleCalulatorReset}
                   >
                     Reset
@@ -494,8 +503,11 @@ function App() {
             </div>
           </div>
 
-          <div className="md:w-[794px] md:h-[1123px] sm:bg-white mx-auto mt-16 rounded relative">
-            <div ref={componentRef} className="p-6 pt-40">
+          <div className="md:w-[794px] h-[1123px] bg-white mx-auto mt-20 rounded relative scale-75 sm:scale-75 md:scale-100 border-black border-2 shadow-[4px_4px_0px_rgba(0,0,0,1)]">
+            <div
+              ref={componentRef}
+              className="p-6 pt-40 h-[1123px] scale-75 sm:scale-100"
+            >
               <Personalia personalia={personalia} />
               <h5 className="text-center mt-14 font-bold underline">
                 Brille 1:
@@ -523,24 +535,30 @@ function App() {
                 </>
               ) : null}
               <div className="text-center mb-6 font-bold">
-                Totalt: {specPrice.total > 0 ? specPrice.total : 0}kr
+                Totalt: {specPrice.total > 0 ? specPrice.total : 0} kr
               </div>
               <p className="font-bold mt-10 text-center">Kommentar: </p>
               <div className="text-center mt-4 w-3/4 border border-black min-h-[80px] h-auto mx-auto break-words">
                 <p className="text-left p-3">{personalia.comment}</p>
               </div>
-              <p className="absolute bottom-5 left-5 ">
+              <span className="absolute -bottom-40 -left-8 sm:bottom-5 sm:left-5  ">
                 {" "}
                 sign. ______________________
-              </p>
+              </span>
             </div>
           </div>
-          <div className="flex justify-center mb-40">
+          <div className="text-center space-x-24 mt-10 mb-40">
             <button
-              className="bg-green-800 text-slate-50 p-2 rounded mt-8 w-20"
+              className="border-black border-2 shadow-[4px_4px_0px_rgba(0,0,0,1)] bg-green-500 hover:scale-110 p-2 rounded mt-8 w-20"
               onClick={handlePrint}
             >
               Skriv ut
+            </button>
+            <button
+              className="border-black border-2 shadow-[4px_4px_0px_rgba(0,0,0,1)] bg-pink-300 hover:scale-110 p-2 rounded w-20"
+              onClick={handleCalulatorReset}
+            >
+              Reset
             </button>
           </div>
         </>

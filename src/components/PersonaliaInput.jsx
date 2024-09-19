@@ -5,10 +5,10 @@ export default function PersonaliaInput({
   handlePersonaliaChange,
 }) {
   return (
-    <form className="w-[350px] md:w-[650px] mx-auto">
+    <form className="w-[350px] md:w-[650px] mx-auto ">
       <div className="flex flex-col w-[290px] md:w-[650px] mx-auto mb-8">
-        <div className="flex flex-col md:flex-row mb-2">
-          <div className="w-32">
+        <div className="flex flex-col md:flex-row mb-4">
+          <div className="w-32 pb-2 md:pb-0">
             <label
               className="text-gray-800 font-bold mb-1 whitespace-nowrap"
               htmlFor="name"
@@ -18,7 +18,7 @@ export default function PersonaliaInput({
           </div>
           <div className="w-72 md:w-96">
             <input
-              className="appearance-none border-2 border-gray-200 rounded-lg w-full pb-1 px-1 text-gray-700 leading-tight h-11"
+              className="appearance-none focus:outline-none border-black border-2 shadow-[4px_4px_0px_rgba(0,0,0,1)]  rounded-lg w-full pb-1 px-1 text-gray-700 leading-tight h-11"
               type="text"
               name="name"
               id="name"
@@ -28,8 +28,8 @@ export default function PersonaliaInput({
             />
           </div>
         </div>
-        <div className="flex flex-col md:flex-row mb-2">
-          <div className="w-32">
+        <div className="flex flex-col md:flex-row mb-4">
+          <div className="w-32 pb-2 md:pb-0">
             <label
               className="text-gray-800 font-bold mb-1 whitespace-nowrap"
               htmlFor="birthDate"
@@ -39,7 +39,7 @@ export default function PersonaliaInput({
           </div>
           <div className="w-72 md:w-96">
             <input
-              className="appearance-none border-2 border-gray-200 rounded-lg w-full pb-1 px-1 text-gray-700 leading-tight h-11"
+              className="appearance-none focus:outline-none border-black border-2 shadow-[4px_4px_0px_rgba(0,0,0,1)]  rounded-lg w-full pb-1 px-1 text-gray-700 leading-tight h-11"
               type="text"
               name="birthDate"
               id="birthDate"
@@ -49,8 +49,8 @@ export default function PersonaliaInput({
             />
           </div>
         </div>
-        <div className="flex flex-col md:flex-row mb-2">
-          <div className="w-32">
+        <div className="flex flex-col md:flex-row mb-4">
+          <div className="w-32 pb-2 md:pb-0">
             <label
               className="text-gray-800 font-bold mb-1 whitespace-nowrap"
               htmlFor="address"
@@ -60,7 +60,7 @@ export default function PersonaliaInput({
           </div>
           <div className="w-72 md:w-96">
             <input
-              className="appearance-none border-2 border-gray-200 rounded-lg w-full pb-1 px-1 text-gray-700 leading-tight h-11"
+              className="appearance-none focus:outline-none border-black border-2 shadow-[4px_4px_0px_rgba(0,0,0,1)]  rounded-lg w-full pb-1 px-1 text-gray-700 leading-tight h-11"
               type="text"
               name="address"
               id="address"
@@ -70,8 +70,8 @@ export default function PersonaliaInput({
             />
           </div>
         </div>
-        <div className="flex flex-col md:flex-row mb-2">
-          <div className="w-32">
+        <div className="flex flex-col md:flex-row mb-4">
+          <div className="w-32 pb-2 md:pb-0">
             <label
               className="text-gray-800 font-bold mb-1 whitespace-nowrap"
               htmlFor="postCode"
@@ -81,7 +81,7 @@ export default function PersonaliaInput({
           </div>
           <div className="w-72 md:w-96">
             <input
-              className="appearance-none border-2 border-gray-200 rounded-lg w-full pb-1 px-1 text-gray-700 leading-tight h-11"
+              className="appearance-none focus:outline-none border-black border-2 shadow-[4px_4px_0px_rgba(0,0,0,1)] rounded-lg w-full pb-1 px-1 text-gray-700 leading-tight h-11"
               type="text"
               name="postCode"
               id="postCode"

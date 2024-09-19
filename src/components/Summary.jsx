@@ -29,7 +29,7 @@ export default function Summary(props) {
 
         <tr className="text-left">
           <td className="relative">
-            <div className="font-bold pr-1 absolute top-2 right-2">
+            <div className="font-bold pr-2 absolute top-2 right-2">
               Innfatning:
             </div>
           </td>
