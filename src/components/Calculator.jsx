@@ -1,5 +1,5 @@
 import Multiselect from "multiselect-react-dropdown";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 export default function Calculator(props) {
   const {
@@ -51,7 +51,7 @@ export default function Calculator(props) {
               setOverflowClipFrame(false);
             }}
             selectedValues={
-              specPrice.id === 2 && specPrice.frameName !== ""
+              specPrice.frameName !== ""
                 ? [
                     {
                       type: `${specPrice.frameName}`,
@@ -117,7 +117,7 @@ export default function Calculator(props) {
               setOverflowClipLens(false);
             }}
             selectedValues={
-              specPrice.id === 2 && specPrice.lensType !== ""
+              specPrice.lensType !== ""
                 ? [
                     {
                       type: `${specPrice.lensType}`,
