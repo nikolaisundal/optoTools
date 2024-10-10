@@ -20,7 +20,7 @@ export default function RadioRow({ handleOfferChange, offerSelect }) {
               type="radio"
               value={option.value}
               name="Tilbud"
-              defaultChecked={option.defaultChecked}
+              checked={offerSelect === option.value}
               onChange={(e) => handleOfferChange(e.target.value)}
             />
             <span>{option.label}</span>

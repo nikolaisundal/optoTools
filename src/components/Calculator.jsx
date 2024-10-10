@@ -1,7 +1,7 @@
 import Multiselect from "multiselect-react-dropdown";
 import { useState } from "react";
 
-export default function Calculator(props) {
+const Calculator = (props) => {
   const {
     handleLensPriceChange,
     handleOnRemove,
@@ -24,7 +24,7 @@ export default function Calculator(props) {
   return (
     <form className="w-[350px] md:w-[650px] mx-auto mb-2">
       <div className="flex flex-col md:flex-row mb-4 w-[290px] md:w-[650px] mx-auto">
-        <div className="w-32 pb-2 md:pb-0">
+        <div className="w-32 pb-2 md:pb-0 flex items-center ">
           <label
             className="text-gray-800 font-bold whitespace-nowrap mr-2"
             htmlFor="Innfatning"
@@ -89,7 +89,7 @@ export default function Calculator(props) {
         </div>
       </div>
       <div className="flex flex-col md:flex-row mb-4 w-[290px] md:w-[650px] mx-auto">
-        <div className="w-32 pb-2 md:pb-0">
+        <div className="w-32 pb-2 md:pb-0 flex items-center ">
           <label
             className="text-gray-800 font-bold mb-1 whitespace-nowrap mr-2"
             htmlFor="glass"
@@ -157,4 +157,6 @@ export default function Calculator(props) {
       </div>
     </form>
   );
-}
+};
+
+export default Calculator;

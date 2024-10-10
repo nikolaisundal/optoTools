@@ -8,7 +8,7 @@ export default function PersonaliaInput({
     <form className="w-[350px] md:w-[650px] mx-auto ">
       <div className="flex flex-col w-[290px] md:w-[650px] mx-auto mb-8">
         <div className="flex flex-col md:flex-row mb-4">
-          <div className="w-32 pb-2 md:pb-0">
+          <div className="w-32 pb-2 md:pb-0 flex items-center ">
             <label
               className="text-gray-800 font-bold mb-1 whitespace-nowrap"
               htmlFor="name"
@@ -29,7 +29,7 @@ export default function PersonaliaInput({
           </div>
         </div>
         <div className="flex flex-col md:flex-row mb-4">
-          <div className="w-32 pb-2 md:pb-0">
+          <div className="w-32 pb-2 md:pb-0 flex items-center ">
             <label
               className="text-gray-800 font-bold mb-1 whitespace-nowrap"
               htmlFor="birthDate"
@@ -50,7 +50,7 @@ export default function PersonaliaInput({
           </div>
         </div>
         <div className="flex flex-col md:flex-row mb-4">
-          <div className="w-32 pb-2 md:pb-0">
+          <div className="w-32 pb-2 md:pb-0 flex items-center ">
             <label
               className="text-gray-800 font-bold mb-1 whitespace-nowrap"
               htmlFor="address"
@@ -71,7 +71,7 @@ export default function PersonaliaInput({
           </div>
         </div>
         <div className="flex flex-col md:flex-row mb-4">
-          <div className="w-32 pb-2 md:pb-0">
+          <div className="w-32 pb-2 md:pb-0 flex items-center ">
             <label
               className="text-gray-800 font-bold mb-1 whitespace-nowrap"
               htmlFor="postCode"

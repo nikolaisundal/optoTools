@@ -367,7 +367,7 @@ function App() {
   };
 
   const handleCalulatorReset = () => {
-    window.location.reload(false);
+    window.location.reload();
   };
 
   const handleRouteChange = (e) => {
@@ -440,6 +440,7 @@ function App() {
                   handlePersonaliaChange={handlePersonaliaChange}
                 />
                 <Calculator
+                  key={0}
                   index={0}
                   handleFramePriceChange={handleFramePriceChange}
                   handleFrameNameChange={handleFrameNameChange}
@@ -459,6 +460,7 @@ function App() {
                   navTwoSpecs === true) && (
                   <>
                     <Calculator
+                      key={1}
                       index={1}
                       handleFramePriceChange={handleFramePriceChange}
                       handleFrameNameChange={handleFrameNameChange}
