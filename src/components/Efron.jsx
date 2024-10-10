@@ -41,7 +41,7 @@ export default function Efron({ id, name, eye, handleUserInputChange, img }) {
           {name}:
         </label>
       </div>
-      <div className="flex items-center col-span-3 relative">
+      <div className="flex items-center col-span-3 relative xl:min-w-[450px]">
         <input
           className="appearance-none focus:outline-none focus:bg-gray-100 border-2 shadow-[4px_4px_0px_rgba(0,0,0,1)] border-black rounded-lg w-full py-2 px-4 text-gray-700 leading-tight"
           autoComplete="off"
