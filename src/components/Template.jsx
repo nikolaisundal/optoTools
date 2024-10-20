@@ -118,7 +118,7 @@ export default function Template(props) {
       </div>
       <div className="w-full relative flex content-center justify-center">
         {modalVisible ? (
-          <div className="absolute z-50 top-14 border-solid bg-slate-100 rounded p-2 w-20 text-center">
+          <div className="absolute z-50 -top-20 border-solid border-2 border-black bg-slate-100 rounded-lg shadow-[4px_4px_0_rgba(0,0,0,1)] p-2 w-20 text-center">
             Kopiert!
           </div>
         ) : null}

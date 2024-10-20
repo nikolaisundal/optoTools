@@ -66,6 +66,9 @@ export default function Efron({ id, name, eye, handleUserInputChange, img }) {
                     handleUserInputChange={handleUserInputChange}
                     setIsHovering={setIsHovering}
                     key={uuidv4()}
+                    className={
+                      number % 0.5 == 0 ? "sm:block" : "hidden sm:block"
+                    }
                   />
                 ))}
               </div>
