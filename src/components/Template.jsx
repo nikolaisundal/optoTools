@@ -67,16 +67,16 @@ export default function Template(props) {
           </div>
           <div className="flex content-center justify-center w-full space-x-24 my-10">
             <button
-              className="border-black border-2 shadow-[4px_4px_0px_rgba(0,0,0,1)] bg-green-500 hover:scale-110 p-2 rounded w-20"
+              className="border-black border-2 shadow-[4px_4px_0px_rgba(0,0,0,1)] bg-green-500 text-slate-900 transition duration-300 hover:scale-110 p-2 rounded w-20"
               onClick={(e) => {
                 handleCopyTest(e, "buttonOd", tests[0].id);
                 showModal();
               }}
             >
-              Kopier!
+              Kopier
             </button>
             <button
-              className="border-black border-2 shadow-[4px_4px_0px_rgba(0,0,0,1)] bg-pink-300 hover:scale-110 p-2 rounded w-20"
+              className="border-black border-2 shadow-[4px_4px_0px_rgba(0,0,0,1)] bg-pink-300 text-slate-900 transition duration-300  hover:scale-110 p-2 rounded w-20"
               onClick={(e) => handleReset(e, "resetOd", tests[0].id)}
             >
               Reset
@@ -99,16 +99,16 @@ export default function Template(props) {
           </div>
           <div className="flex content-center justify-center w-full space-x-24 my-10">
             <button
-              className="border-black border-2 shadow-[4px_4px_0px_rgba(0,0,0,1)] bg-green-500 hover:scale-110 p-2 rounded w-20"
+              className="border-black border-2 shadow-[4px_4px_0px_rgba(0,0,0,1)] bg-green-500 text-slate-900 transition duration-300  hover:scale-110 p-2 rounded w-20"
               onClick={(e) => {
                 handleCopyTest(e, "buttonOs", tests[0].id);
                 showModal();
               }}
             >
-              Kopier!
+              Kopier
             </button>
             <button
-              className="border-black border-2 shadow-[4px_4px_0px_rgba(0,0,0,1)] bg-pink-300 hover:scale-110 p-2 rounded w-20"
+              className="border-black border-2 shadow-[4px_4px_0px_rgba(0,0,0,1)] bg-pink-300 text-slate-900 transition duration-300  hover:scale-110 p-2 rounded w-20"
               onClick={(e) => handleReset(e, "resetOs", tests[0].id)}
             >
               Reset

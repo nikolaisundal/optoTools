@@ -32,7 +32,7 @@ const Calculator = (props) => {
             Innfatning:
           </label>
         </div>
-        <div className="w-72 md:w-96 mr-4 pb-2 md:pb-0">
+        <div className="w-72 md:w-96 mr-4 pb-4 md:pb-0">
           <Multiselect
             className={`bg-slate-50 appearance-none focus:outline-none focus-within::bg-gray-100 border-black border-2 shadow-[4px_4px_0px_rgba(0,0,0,1)] rounded-lg text-gray-700 leading-tight h-11 ${
               overflowClipFrame ? " overflow-clip" : ""
@@ -71,12 +71,12 @@ const Calculator = (props) => {
               },
               chips: {
                 background: "rgb(34, 197, 94)",
-                color: "black",
+                color: "rgb(15, 23, 42)",
               },
             }}
           />
         </div>
-        <div className="w-72 md:w-32 pb-2 md:pb-0">
+        <div className="w-72 md:w-32 pb-4 md:pb-0">
           <input
             className="appearance-none focus:outline-none border-black border-2 shadow-[4px_4px_0px_rgba(0,0,0,1)] rounded-lg w-full py-2 px-1 text-gray-700 leading-tight h-11"
             type="text"
@@ -89,7 +89,7 @@ const Calculator = (props) => {
         </div>
       </div>
       <div className="flex flex-col md:flex-row mb-4 w-[290px] md:w-[650px] mx-auto">
-        <div className="w-32 pb-2 md:pb-0 flex items-center ">
+        <div className="w-32 pb-4 md:pb-0 flex items-center ">
           <label
             className="text-gray-800 font-bold mb-1 whitespace-nowrap mr-2"
             htmlFor="glass"
@@ -97,7 +97,7 @@ const Calculator = (props) => {
             Glass:
           </label>
         </div>
-        <div className="w-72 md:w-96 mr-4 pb-2 md:pb-0">
+        <div className="w-72 md:w-96 mr-4 pb-4 md:pb-0">
           <Multiselect
             className={`bg-slate-50 appearance-none focus:outline-none border-black border-2 shadow-[4px_4px_0px_rgba(0,0,0,1)] rounded-lg text-gray-700 leading-tight h-11${
               overflowClipLens ? " overflow-clip" : ""
@@ -137,7 +137,7 @@ const Calculator = (props) => {
               },
               chips: {
                 background: "rgb(34, 197, 94)",
-                color: "black",
+                color: "rgb(15, 23, 42)",
               },
             }}
           />

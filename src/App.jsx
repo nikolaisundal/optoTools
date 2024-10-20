@@ -385,14 +385,14 @@ function App() {
       </div>
       <div className="text-center sm:text-right mb-10">
         <button
-          className="text-xl mr-4 hover:underline"
+          className="text-xl mr-4 transition duration-800 hover:underline"
           id="calculator"
           onClick={(e) => handleRouteChange(e)}
         >
           Brillekalkulator
         </button>
         <button
-          className="text-xl mx-4 hover:underline"
+          className="text-xl mx-4 transition duration-300 hover:underline"
           id="template"
           onClick={(e) => handleRouteChange(e)}
         >
@@ -489,13 +489,13 @@ function App() {
                 </div>
                 <div className="text-center space-x-24 mt-4">
                   <button
-                    className="border-black border-2 shadow-[4px_4px_0px_rgba(0,0,0,1)] bg-green-500 hover:scale-110 p-2 rounded mt-8 w-20"
+                    className="border-black  border-2 shadow-[4px_4px_0px_rgba(0,0,0,1)] bg-green-500  text-slate-900 transition duration-300 hover:scale-110 p-2 rounded mt-8 w-20"
                     onClick={handlePrint}
                   >
                     Skriv ut
                   </button>
                   <button
-                    className="border-black border-2 shadow-[4px_4px_0px_rgba(0,0,0,1)] bg-pink-300 hover:scale-110 p-2 rounded w-20"
+                    className="border-black border-2 shadow-[4px_4px_0px_rgba(0,0,0,1)] bg-pink-300 text-slate-900 transition duration-300 hover:scale-110 p-2 rounded w-20"
                     onClick={handleCalulatorReset}
                   >
                     Reset
@@ -505,10 +505,10 @@ function App() {
             </div>
           </div>
 
-          <div className="md:w-[794px] h-[1123px] bg-white mx-auto mt-20 rounded relative scale-75 sm:scale-75 md:scale-100 border-black border-2 shadow-[4px_4px_0px_rgba(0,0,0,1)]">
+          <div className="md:w-[794px] h-[870px] sm:h-[1123px] bg-white mx-auto mt-20 rounded relative scale-75 md:scale-100 border-black border-2 shadow-[4px_4px_0px_rgba(0,0,0,1)]">
             <div
               ref={componentRef}
-              className="p-6 pt-40 h-[1123px] scale-75 sm:scale-100"
+              className="p-6 pt-14 sm:pt-40 sm:h-[1123px] scale-75 sm:scale-100"
             >
               <Personalia personalia={personalia} />
               <h5 className="text-center mt-14 font-bold underline">
@@ -543,7 +543,15 @@ function App() {
               <div className="text-center mt-4 w-3/4 border border-black min-h-[80px] h-auto mx-auto break-words">
                 <p className="text-left p-3">{personalia.comment}</p>
               </div>
-              <span className="absolute -bottom-40 -left-8 sm:bottom-5 sm:left-5  ">
+              <span
+                className={`absolute ${
+                  offerSelect === "ToForEn" ||
+                  offerSelect === "ToForEnUV" ||
+                  navTwoSpecs
+                    ? "-bottom-20 -left-8 sm:bottom-5 sm:left-5"
+                    : "-bottom-64 -left-8 sm:bottom-5 sm:left-5"
+                }`}
+              >
                 {" "}
                 sign. ______________________
               </span>
@@ -551,13 +559,13 @@ function App() {
           </div>
           <div className="text-center space-x-24 mt-10 mb-40">
             <button
-              className="border-black border-2 shadow-[4px_4px_0px_rgba(0,0,0,1)] bg-green-500 hover:scale-110 p-2 rounded mt-8 w-20"
+              className="border-black border-2 shadow-[4px_4px_0px_rgba(0,0,0,1)] bg-green-500 text-slate-900 transition duration-300  hover:scale-110 p-2 rounded mt-8 w-20"
               onClick={handlePrint}
             >
               Skriv ut
             </button>
             <button
-              className="border-black border-2 shadow-[4px_4px_0px_rgba(0,0,0,1)] bg-pink-300 hover:scale-110 p-2 rounded w-20"
+              className="border-black border-2 shadow-[4px_4px_0px_rgba(0,0,0,1)] bg-pink-300 text-slate-900  transition duration-300 hover:scale-110 p-2 rounded w-20"
               onClick={handleCalulatorReset}
             >
               Reset

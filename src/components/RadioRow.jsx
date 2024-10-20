@@ -14,7 +14,7 @@ export default function RadioRow({ handleOfferChange, offerSelect }) {
     <div className="mb-5 flex justify-center flex-wrap max-w-screen-sm ">
       {optionsArray.map((option) => (
         <div key={option.value}>
-          <label className="flex items-center cursor-pointer ml-4">
+          <label className="flex items-center cursor-pointer m-2">
             <input
               className="mr-1 cursor-pointer"
               type="radio"
@@ -30,7 +30,7 @@ export default function RadioRow({ handleOfferChange, offerSelect }) {
 
       {offerSelect === "NAV" && (
         <div>
-          <label className="flex items-center cursor-pointer ml-4 mt-2">
+          <label className="flex items-center cursor-pointer m-2">
             <input
               className="mr-1 cursor-pointer"
               type="checkbox"
@@ -47,7 +47,7 @@ export default function RadioRow({ handleOfferChange, offerSelect }) {
       )}
 
       <div>
-        <label className="flex items-center cursor-pointer ml-4  mt-2">
+        <label className="flex items-center cursor-pointer m-2">
           <input
             className="mr-1 cursor-pointer"
             type="checkbox"
