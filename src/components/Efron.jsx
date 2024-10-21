@@ -57,7 +57,7 @@ export default function Efron({ id, name, eye, handleUserInputChange, img }) {
         {isHovering && img && (
           <div className="absolute top-10 left-0 z-10">
             <div className="bg-white  border-2 shadow-[4px_4px_0px_rgba(0,0,0,1)] border-black rounded-lg">
-              <div className="background_numscale_row w-full h-8 rounded-t-md flex justify-evenly text-slate-50 pt-1  ">
+              <div className="background_numscale_row w-full h-8 rounded-t-md flex justify-between px-2 pt-2 text-slate-50 ">
                 {scaleNumArray.map((number) => (
                   <ScaleNum
                     number={number}

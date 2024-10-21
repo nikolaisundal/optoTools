@@ -508,7 +508,7 @@ function App() {
           <div className="md:w-[794px] h-[870px] sm:h-[1123px] bg-white mx-auto mt-20 rounded relative scale-75 md:scale-100 border-black border-2 shadow-[4px_4px_0px_rgba(0,0,0,1)]">
             <div
               ref={componentRef}
-              className="p-6 pt-14 sm:pt-40 sm:h-[1123px] scale-75 sm:scale-100"
+              className="p-6 pt-14 sm:pt-40 sm:h-[1122px] scale-75 sm:scale-100"
             >
               <Personalia personalia={personalia} />
               <h5 className="text-center mt-14 font-bold underline">
@@ -548,8 +548,8 @@ function App() {
                   offerSelect === "ToForEn" ||
                   offerSelect === "ToForEnUV" ||
                   navTwoSpecs
-                    ? "-bottom-20 -left-8 sm:bottom-5 sm:left-5"
-                    : "-bottom-64 -left-8 sm:bottom-5 sm:left-5"
+                    ? "-bottom-20 -left-8 sm:bottom-5 sm:left-7"
+                    : "-bottom-64 -left-8 sm:bottom-5 sm:left-7"
                 }`}
               >
                 {" "}
