@@ -358,7 +358,7 @@ const lens = [
   {
     type: "1,5 Standard UCSC Reactions",
     id: uuidv4(),
-    price: 2600,
+    price: 2700,
     cat: "Standard Reactions",
   },
   {
