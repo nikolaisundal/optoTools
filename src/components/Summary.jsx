@@ -42,7 +42,7 @@ export default function Summary(props) {
               : frameName}
           </td>
           <td className="border-2 border-black px-4 py-2">
-            {offerSelect === "NAV" && framePrice > 295
+            {offerSelect === "NAV" && framePrice > 294
               ? `${framePrice - 295} kr`
               : (offerSelect === "NAV" && framePrice <= 295) ||
                 offerSelect !== "NAV"
