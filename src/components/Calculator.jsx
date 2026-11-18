@@ -1,4 +1,4 @@
-import Multiselect from "multiselect-react-dropdown";
+import { Multiselect } from "multiselect-react-dropdown";
 import { useState } from "react";
 
 const Calculator = (props) => {
